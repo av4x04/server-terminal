@@ -1,0 +1,35 @@
+entrypoint = "main.sh"
+modules = ["bash"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["bash", "main.sh"]
+deploymentTarget = "cloudrun"
+
+[agent]
+expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Info Display"
+
+[[workflows.workflow]]
+name = "Info Display"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash main.sh"
+
+[workflows.workflow.metadata]
+outputType = "console"
