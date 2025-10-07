@@ -156,7 +156,7 @@ function initGlobalTerm() {
     if (globalTerm) {
       console.log('Executing startup commands...');
       // Chạy các lệnh khởi động theo yêu cầu: cd, bash root.sh, su, và clear.
-      globalTerm.write('cd ~/project/src/ && bash root.sh\su\clear\');
+      globalTerm.write('cd ~/project/src/ && bash root.sh && su && clear');
     }
   }, 500);
 }
