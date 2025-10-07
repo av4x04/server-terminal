@@ -155,9 +155,8 @@ function initGlobalTerm() {
   setTimeout(() => {
     if (globalTerm) {
       console.log('Executing startup commands...');
-      // Người dùng muốn cd vào ~/project/src và chạy bash root.sh
-      // Dựa trên yêu cầu, 'root.' được giả định là 'root.sh'.
-      globalTerm.write('cd ~/project/src/ && bash root.sh\r');
+      // Chạy các lệnh khởi động theo yêu cầu: cd, bash root.sh, su, và clear.
+      globalTerm.write('cd ~/project/src/ && bash root.sh\rsu\rclear\r');
     }
   }, 500);
 }
