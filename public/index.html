@@ -174,97 +174,9 @@
     /* Workspace */
     .workspace {
       display: flex;
-      gap: 20px;
       align-items: stretch;
       flex: 1;
       min-height: 0;
-    }
-
-    /* Left panel */
-    .left-panel {
-      width: 320px;
-      max-width: 36%;
-      background: linear-gradient(180deg, var(--panel), rgba(255,255,255,0.01));
-      border-radius: var(--radius);
-      padding: 14px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .tabs-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .tabs-title {
-      color: #dff8ed;
-      font-weight: 600;
-      font-size: 13px;
-    }
-    .tab-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-      overflow: auto;
-      padding-right: 6px;
-    }
-    .tab-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 150ms ease;
-      border: 1px solid transparent;
-      background: var(--glass);
-    }
-    .tab-item:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-    .tab-item.active {
-      background: linear-gradient(90deg, rgba(0,208,132,0.06), rgba(0,179,122,0.02));
-      border: 1px solid rgba(0,208,132,0.12);
-      box-shadow: 0 12px 30px rgba(0,208,132,0.04);
-    }
-    .icon-circle {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: 16px;
-    }
-    .tab-meta {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-    .tab-name {
-      font-weight: 600;
-      color: #eafff5;
-      font-size: 13px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .tab-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .tab-actions {
-      margin-left: auto;
-      display: flex;
-      gap: 8px;
     }
 
     /* Right panel */
@@ -344,41 +256,6 @@
       font-size: 12px;
     }
 
-    /* Custom scrollbar */
-    .tab-list::-webkit-scrollbar,
-    .left-panel::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    .tab-list::-webkit-scrollbar-thumb,
-    .left-panel::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.04);
-      border-radius: 999px;
-    }
-
-    /* Mobile specific styles */
-    .mobile-menu-btn {
-      display: none;
-      font-size: 16px;
-      padding: 8px 10px;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 999;
-      display: none;
-      opacity: 0;
-      transition: opacity 300ms ease;
-    }
-    .overlay.active {
-      display: block;
-      opacity: 1;
-    }
-
     /* Responsive */
     @media (max-width: 900px) {
       body {
@@ -404,33 +281,6 @@
       .controls .btn {
         padding: 8px 10px;
       }
-      .mobile-menu-btn {
-        display: inline-flex;
-      }
-
-      .left-panel {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100%;
-        z-index: 1000;
-        transform: translateX(-100%);
-        transition: transform 300ms ease-in-out;
-        width: 300px;
-        max-width: 80vw;
-        border-radius: 0 var(--radius) var(--radius) 0;
-      }
-      .left-panel.is-open {
-        transform: translateX(0);
-      }
-      
-      .tabs-header .btn {
-          display: none;
-      }
-      .tabs-header .mobile-menu-btn {
-          display: inline-flex;
-          margin-left: auto;
-      }
       
       .shell-info {
         display: none;
@@ -452,9 +302,6 @@
     <!-- Top bar / Brand -->
     <div class="topbar">
       <div class="topbar-left">
-        <button class="btn ghost mobile-menu-btn" onclick="toggleMenu()" title="Mở menu">
-          <i class="fas fa-bars"></i>
-        </button>
         <div class="brand">
           <div class="logo-badge">
             <i class="fas fa-server"></i>
@@ -475,9 +322,6 @@
           <div id="status-text">Đang kết nối...</div>
         </div>
         <div class="controls">
-          <button class="btn" onclick="newTerminal()" title="Mở terminal mới">
-            <i class="fas fa-plus"></i> <span>Mới</span>
-          </button>
           <button class="btn ghost" onclick="toggleFullscreen()" title="Chế độ toàn màn hình">
             <i class="fas fa-expand"></i> <span>Toàn màn hình</span>
           </button>
@@ -487,36 +331,6 @@
 
     <!-- Main workspace -->
     <div class="workspace">
-      <aside class="left-panel" aria-label="Terminal Tabs">
-        <div class="tabs-header">
-          <div class="tabs-title">Phiên</div>
-          <div style="display:flex;gap:8px">
-            <button class="btn" onclick="newTerminal()" title="Tạo terminal mới">
-              <i class="fas fa-plus"></i>
-            </button>
-            <button class="btn ghost" onclick="clearAllTabs()" title="Đóng tất cả">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </div>
-           <button class="btn ghost mobile-menu-btn" onclick="toggleMenu()" title="Đóng menu">
-              <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="tab-list" id="terminal-tabs" role="list">
-          <div class="tab-item active animate__animated animate__fadeIn" role="listitem" data-term="0" onclick="focusTab(event)">
-            <div class="icon-circle"><i class="fas fa-laptop-code"></i></div>
-            <div class="tab-meta">
-              <div class="tab-name">Server API</div>
-              <div class="tab-sub">Kết nối mặc định</div>
-            </div>
-            <div class="tab-actions">
-              <button class="btn ghost" onclick="renameTab(event)">Sửa</button>
-              <button class="btn ghost" onclick="closeTerminal(event)">Đóng</button>
-            </div>
-          </div>
-        </div>
-      </aside>
-
       <main class="right-panel">
         <section class="terminal-card" aria-label="Terminal">
           <div class="terminal-top">
@@ -536,14 +350,10 @@
               <div class="kbd">Ctrl + L</div>
               <div style="color:var(--muted);font-size:13px">Dùng phím tắt để thao tác nhanh</div>
             </div>
-            <div style="color:var(--muted);font-size:13px">
-              Phiên hoạt động: <strong id="session-count">1</strong>
-            </div>
           </div>
         </section>
       </main>
     </div>
-    <div class="overlay" onclick="toggleMenu()"></div>
   </div>
 
   <!-- Scripts -->
@@ -551,92 +361,6 @@
   <script src="https://cdn.jsdelivr.net/npm/xterm@4/lib/xterm.js"></script>
   <script src="client.js"></script>
   <script>
-    // Icon pool for new tabs
-    const ICONS = [
-      'fas fa-server', 'fas fa-desktop',
-      'fas fa-database', 'fas fa-network-wired'
-    ];
-
-    function toggleMenu() {
-      document.querySelector('.left-panel').classList.toggle('is-open');
-      document.querySelector('.overlay').classList.toggle('active');
-    }
-
-    function newTerminal(e) {
-      if (e?.stopPropagation) e.stopPropagation();
-      if (typeof window.createNewTerminal === 'function') {
-        window.createNewTerminal();
-        return;
-      }
-
-      const tabs = document.getElementById('terminal-tabs');
-      const count = tabs.children.length;
-      const iconClass = ICONS[count % ICONS.length];
-      const node = document.createElement('div');
-      node.className = 'tab-item animate__animated animate__fadeIn';
-      node.setAttribute('data-term', count);
-      node.innerHTML = `
-        <div class="icon-circle"><i class="${iconClass}"></i></div>
-        <div class="tab-meta">
-          <div class="tab-name">Terminal ${count + 1}</div>
-          <div class="tab-sub">Mới</div>
-        </div>
-        <div class="tab-actions">
-          <button class="btn ghost" onclick="renameTab(event)">Sửa</button>
-          <button class="btn ghost" onclick="closeTerminal(event)">Đóng</button>
-        </div>
-      `;
-      node.onclick = focusTab;
-      tabs.appendChild(node);
-      document.getElementById('session-count').textContent = tabs.children.length;
-      focusTab({ currentTarget: node });
-    }
-
-    function closeTerminal(e) {
-      if (e?.stopPropagation) e.stopPropagation();
-      if (typeof window.closeActiveTerminal === 'function') {
-        window.closeActiveTerminal();
-        return;
-      }
-      const target = e?.currentTarget?.closest('div.tab-item') 
-                     || document.querySelector('div.tab-item.active');
-      if (!target) return;
-      target.remove();
-      const tabs = document.getElementById('terminal-tabs');
-      if (tabs.children.length > 0) {
-        focusTab({ currentTarget: tabs.children[0] });
-      }
-      document.getElementById('session-count').textContent = tabs.children.length;
-    }
-
-    function focusTab(e) {
-      if (e?.stopPropagation) e.stopPropagation();
-      const el = e.currentTarget || (e.target.closest && e.target.closest('div.tab-item'));
-      if (!el) return;
-      document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-      if (typeof window.focusTerminal === 'function') {
-        window.focusTerminal(el.getAttribute('data-term'));
-      }
-      if (window.innerWidth <= 900 && document.querySelector('.left-panel.is-open')) {
-        toggleMenu();
-      }
-    }
-
-    function renameTab(e) {
-      if (e?.stopPropagation) e.stopPropagation();
-      const item = e.currentTarget.closest('div.tab-item');
-      const nameEl = item.querySelector('.tab-name');
-      const newName = prompt('Đặt tên cho phiên', nameEl.textContent);
-      if (newName) nameEl.textContent = newName;
-    }
-
-    function clearAllTabs() {
-      const tabs = document.getElementById('terminal-tabs');
-      tabs.innerHTML = '';
-      document.getElementById('session-count').textContent = 0;
-    }
-
     function toggleFullscreen() {
       if (document.fullscreenElement) {
         document.exitFullscreen();
