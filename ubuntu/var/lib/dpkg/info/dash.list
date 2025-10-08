@@ -13,7 +13,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/dash
-/usr/share/man
 /usr/share/man/man1
 /usr/share/man/man1/dash.1.gz
 /usr/share/menu

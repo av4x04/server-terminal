@@ -24,7 +24,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/mount
-/usr/share/man
 /usr/share/man/man5
 /usr/share/man/man5/fstab.5.gz
 /usr/share/man/man8

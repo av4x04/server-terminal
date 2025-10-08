@@ -18,7 +18,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/libpam-modules-bin
-/usr/share/man
 /usr/share/man/man8
 /usr/share/man/man8/faillock.8.gz
 /usr/share/man/man8/mkhomedir_helper.8.gz

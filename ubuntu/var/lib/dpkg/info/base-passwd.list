@@ -18,7 +18,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/base-passwd
-/usr/share/man
 /usr/share/man/de
 /usr/share/man/de/man8
 /usr/share/man/de/man8/update-passwd.8.gz

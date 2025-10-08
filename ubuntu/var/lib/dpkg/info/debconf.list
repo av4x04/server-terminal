@@ -36,7 +36,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/debconf
-/usr/share/man
 /usr/share/man/man1
 /usr/share/man/man1/debconf-apt-progress.1.gz
 /usr/share/man/man1/debconf-communicate.1.gz

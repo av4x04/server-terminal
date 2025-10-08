@@ -21,7 +21,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/bsdutils
-/usr/share/man
 /usr/share/man/man1
 /usr/share/man/man1/logger.1.gz
 /usr/share/man/man1/renice.1.gz

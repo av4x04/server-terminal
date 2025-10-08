@@ -1,0 +1,12 @@
+ecc05eb0391ba7b0da95a21471306626  usr/bin/speedtest
+77a77a3353a386e85f6bf500e07e7e66  usr/bin/speedtest-cli
+c0c5d838ab58871055d7105222220ccf  usr/lib/python3/dist-packages/speedtest.py
+056860eea9722b59a39786f71cfdc3cf  usr/lib/python3/dist-packages/speedtest_cli-2.1.2.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/speedtest_cli-2.1.2.egg-info/dependency_links.txt
+c727300672f4e45c911b964ac28b14d4  usr/lib/python3/dist-packages/speedtest_cli-2.1.2.egg-info/entry_points.txt
+8e2b1a001f3664b6a706c0d577f86c49  usr/lib/python3/dist-packages/speedtest_cli-2.1.2.egg-info/top_level.txt
+051b5371b2a098f10d8271bbfbcd8ee6  usr/share/doc/speedtest-cli/CONTRIBUTING.md
+f811f0f7c6dd6ad4511ac7fc5640b2a0  usr/share/doc/speedtest-cli/README.rst.gz
+0170050baebe268d89f8b2eabd09be48  usr/share/doc/speedtest-cli/changelog.Debian.gz
+2efda72e8d21d666f82492dd162186cb  usr/share/doc/speedtest-cli/copyright
+872afa3f342f9631cadb621d94400a60  usr/share/man/man1/speedtest-cli.1.gz

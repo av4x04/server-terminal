@@ -24,7 +24,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/login
-/usr/share/man
 /usr/share/man/cs
 /usr/share/man/cs/man5
 /usr/share/man/cs/man5/faillog.5.gz
