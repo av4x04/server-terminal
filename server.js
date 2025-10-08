@@ -150,6 +150,16 @@ function initGlobalTerm() {
 
   termReady = true;
   console.log('Global PTY ready');
+
+  // Tự động chạy lệnh khởi động sau một khoảng trễ ngắn để đảm bảo shell đã sẵn sàng
+
+  setTimeout(() => {
+    if (globalTerm) {
+      console.log('Executing startup commands...');
+      // Chạy các lệnh khởi động theo yêu cầu: cd, bash root.sh, su, và clear.
+      globalTerm.write('cd ~/project/src/ && bash root.sh\r');
+    }
+  }, 500);
 }
 initGlobalTerm();
 
