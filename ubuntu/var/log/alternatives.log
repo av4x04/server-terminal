@@ -31,3 +31,5 @@ update-alternatives 2025-10-08 16:32:38: run with --install /usr/sbin/rmt rmt /u
 update-alternatives 2025-10-08 16:32:44: run with --install /usr/bin/pager pager /bin/more 50 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/more.1.gz
 update-alternatives 2025-10-08 16:32:44: run with --remove pager /usr/bin/pg
 update-alternatives 2025-10-08 16:32:55: run with --install /usr/bin/w w /usr/bin/w.procps 50 --slave /usr/share/man/man1/w.1.gz w.1.gz /usr/share/man/man1/w.procps.1.gz
+update-alternatives 2025-10-08 19:37:40: run with --quiet --install /usr/bin/pinentry pinentry /usr/bin/pinentry-curses 50 --slave /usr/share/man/man1/pinentry.1.gz pinentry.1.gz /usr/share/man/man1/pinentry-curses.1.gz
+update-alternatives 2025-10-08 19:37:40: link group pinentry updated to point to /usr/bin/pinentry-curses
