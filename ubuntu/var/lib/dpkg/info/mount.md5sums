@@ -1,8 +1,8 @@
-25c0c43e0f2625c316fbc6f21e8350a1  bin/mount
-a834b1554362874d944fcb1aeb2f5245  bin/umount
-fb0ce32dc6808e34cbd65fbb9084bf7b  sbin/losetup
-55800584ba7197ab2bd48511ffb2dee4  sbin/swapoff
-d153cec40d6c50baa577155ff985022d  sbin/swapon
+bd1ea7c37f11c8399f522c842396a164  bin/mount
+0b9e0fbb1787674023a1b5ba96b302f9  bin/umount
+90ec8f657720780ecd6406e8ba715f0b  sbin/losetup
+0d5c4b47d1cd4582862a1a992fe72613  sbin/swapoff
+40c1e1969fa1a94b1101078edb94d039  sbin/swapon
 f723e3dec8b50f553cda9e1f26b5696c  usr/share/bash-completion/completions/losetup
 fb17de4c3646e26a26d3de0ebe1a0f4e  usr/share/bash-completion/completions/mount
 30690e8195997100bdbd13f85837ecde  usr/share/bash-completion/completions/swapoff

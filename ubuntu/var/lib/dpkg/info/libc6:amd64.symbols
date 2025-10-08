@@ -305,9 +305,12 @@ libc.so.6 libc6 #MINVER#
  __fxstatat64@GLIBC_2.4 2.4
  __fxstatat@GLIBC_2.4 2.4
  __gai_sigqueue@GLIBC_PRIVATE 0 1
+ __gconv_create_spec@GLIBC_PRIVATE 0 1
+ __gconv_destroy_spec@GLIBC_PRIVATE 0 1
  __gconv_get_alias_db@GLIBC_PRIVATE 0 1
  __gconv_get_cache@GLIBC_PRIVATE 0 1
  __gconv_get_modules_db@GLIBC_PRIVATE 0 1
+ __gconv_open@GLIBC_PRIVATE 0 1
  __gconv_transliterate@GLIBC_PRIVATE 0 1
  __getauxval@GLIBC_2.16 2.16
  __getcwd_chk@GLIBC_2.4 2.4

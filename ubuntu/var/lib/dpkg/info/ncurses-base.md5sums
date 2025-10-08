@@ -40,7 +40,7 @@ ddc200c30ecff55f71dd3c19d5375006  lib/terminfo/x/xterm-r5
 8b88ffea0ba02455c2467d730ca57407  lib/terminfo/x/xterm-r6
 ffa69ef5d5c963969151ff88d822650e  lib/terminfo/x/xterm-vt220
 d15689402286f12ae9d8a83bbd25bbd4  lib/terminfo/x/xterm-xfree86
-3303a1314e5fced498f1403b1c1feea1  usr/share/doc/ncurses-base/changelog.Debian.gz
+c6ce90d135e35d91afcc2489efcd1efa  usr/share/doc/ncurses-base/changelog.Debian.gz
 8b8dc6b6ca0be730abe2a9ec5fb88fbf  usr/share/doc/ncurses-base/copyright
 6994e71b5615bf6aa5c615412dbeda61  usr/share/lintian/overrides/ncurses-base
 0633f2811ab9958deef70a4ceb124d2e  usr/share/tabset/std

@@ -25,7 +25,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/python3
-/usr/share/man
 /usr/share/man/man1
 /usr/share/pixmaps
 /usr/share/python3

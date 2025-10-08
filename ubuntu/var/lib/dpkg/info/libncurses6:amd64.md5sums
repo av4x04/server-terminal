@@ -1,4 +1,4 @@
-d0f201cee93dec46431f4e761fcf4fc4  lib/x86_64-linux-gnu/libncurses.so.6.2
-4886f19177f524581e147fb6d2f1a0ca  usr/lib/x86_64-linux-gnu/libform.so.6.2
-cc3f412b0373a00dc8a84d14275d2aae  usr/lib/x86_64-linux-gnu/libmenu.so.6.2
-76a03800476e3989b84fe3d23f26ea60  usr/lib/x86_64-linux-gnu/libpanel.so.6.2
+6d15e8b010ab6d62e96c39283122acfe  lib/x86_64-linux-gnu/libncurses.so.6.2
+ec14fbf2175c821fe4ecd0a36a3bcce5  usr/lib/x86_64-linux-gnu/libform.so.6.2
+4ff59659eddbde8f94a42fe6563e6d80  usr/lib/x86_64-linux-gnu/libmenu.so.6.2
+d58fa2211f91878b8e16d410a77fbcd3  usr/lib/x86_64-linux-gnu/libpanel.so.6.2

@@ -17,6 +17,7 @@
 /usr/share/doc/libpcre3/README.gz
 /usr/share/doc/libpcre3/changelog.Debian.gz
 /usr/share/doc/libpcre3/copyright
+/usr/share/man
 /usr/share/man/man3
 /usr/share/man/man3/pcrepattern.3.gz
 /lib/x86_64-linux-gnu/libpcre.so.3

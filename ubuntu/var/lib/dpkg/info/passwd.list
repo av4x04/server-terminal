@@ -53,6 +53,7 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/passwd
+/usr/share/man
 /usr/share/man/cs
 /usr/share/man/cs/man1
 /usr/share/man/cs/man1/expiry.1.gz

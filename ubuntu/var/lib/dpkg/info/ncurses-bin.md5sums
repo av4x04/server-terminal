@@ -1,10 +1,10 @@
-3705244967ba767c2de9c7c47e1113ba  usr/bin/clear
-1bbaff09c463f4cc3dd940660528bc46  usr/bin/infocmp
-e5f2c1f787fae3a53108324420810769  usr/bin/tabs
-fc9845f779683e2de8e8a1ff5647c2a0  usr/bin/tic
-cf250a7ddf5546da8beec4e0b5e66224  usr/bin/toe
-8b13159fd1837e48c0bb288a7af6d542  usr/bin/tput
-3f399cb6943263cec5875327491e7cdc  usr/bin/tset
+c6f41611adf15bae298d788eaa67cac4  usr/bin/clear
+7ad5b8f83f46123902ec9fa7e65ea426  usr/bin/infocmp
+0f182cdda6a879cc08412847ffb6f164  usr/bin/tabs
+e5235b0704e6a9d9059e0044bc5e28dd  usr/bin/tic
+3f46bb522ca4e45971f413540fa0aa55  usr/bin/toe
+7184bf34a9fea87337d6d439e99869bd  usr/bin/tput
+4ea8da442f4b61f84377530c82370a87  usr/bin/tset
 8b8dc6b6ca0be730abe2a9ec5fb88fbf  usr/share/doc/ncurses-bin/copyright
 524ab89574ef9d8ae94598b93fef7949  usr/share/man/man1/captoinfo.1.gz
 ef2abeb9ed5160c4017c4afc53baacea  usr/share/man/man1/clear.1.gz

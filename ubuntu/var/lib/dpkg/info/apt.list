@@ -12,7 +12,6 @@
 /etc/cron.daily/apt-compat
 /etc/kernel
 /etc/kernel/postinst.d
-/etc/kernel/postinst.d/apt-auto-removal
 /etc/logrotate.d
 /etc/logrotate.d/apt
 /lib
@@ -207,6 +206,7 @@
 /usr/share/locale/zh_TW
 /usr/share/locale/zh_TW/LC_MESSAGES
 /usr/share/locale/zh_TW/LC_MESSAGES/apt.mo
+/usr/share/man
 /usr/share/man/de
 /usr/share/man/de/man1
 /usr/share/man/de/man1/apt-transport-http.1.gz
@@ -256,7 +256,6 @@
 /usr/share/man/it/man5
 /usr/share/man/it/man5/apt.conf.5.gz
 /usr/share/man/it/man5/apt_preferences.5.gz
-/usr/share/man/it/man5/sources.list.5.gz
 /usr/share/man/it/man8
 /usr/share/man/it/man8/apt-cache.8.gz
 /usr/share/man/it/man8/apt-cdrom.8.gz
@@ -270,7 +269,6 @@
 /usr/share/man/ja/man5
 /usr/share/man/ja/man5/apt.conf.5.gz
 /usr/share/man/ja/man5/apt_preferences.5.gz
-/usr/share/man/ja/man5/sources.list.5.gz
 /usr/share/man/ja/man8
 /usr/share/man/ja/man8/apt-cache.8.gz
 /usr/share/man/ja/man8/apt-cdrom.8.gz

@@ -1,6 +1,6 @@
-cf786c846242e5d014a3605407b85c0e  sbin/cfdisk
-c05b7fb7cb6d889f5adc53deb35697d1  sbin/fdisk
-6921f6dcc1c7bc66b3b559560a22afde  sbin/sfdisk
+3c30e6c0fd907accf5c6cbb252f84e6e  sbin/cfdisk
+f9a48e30145d2d9e512948e511845fc3  sbin/fdisk
+20fd6762f784c2f6d21fc7c87648e957  sbin/sfdisk
 6774c257b207bfb0cc1b44613abe996b  usr/share/bash-completion/completions/cfdisk
 3c171ae9620a1604066753e76fd8d6b2  usr/share/bash-completion/completions/fdisk
 08eb8afe1e4570dc92af0158f2c3f0c8  usr/share/bash-completion/completions/sfdisk

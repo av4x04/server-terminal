@@ -30,7 +30,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/openssl
-/usr/share/man
 /usr/share/man/man1
 /usr/share/man/man1/CA.pl.1ssl.gz
 /usr/share/man/man1/asn1parse.1ssl.gz

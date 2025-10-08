@@ -1,7 +1,7 @@
 18f746c5c90ff506445f615ae44f5a7b  lib/systemd/system/motd-news.service
 79b82d315319fdb55ccf0f2b4c83fe62  lib/systemd/system/motd-news.timer
-57b95ef16bac660b9d04b8fbfba65302  usr/bin/locale-check
-2deeb485c2ca91454243e986bdbc9544  usr/lib/os-release
+667142b46af83027c71e046c20b9b762  usr/bin/locale-check
+4e142ecd6228c7e40ca4bdc47bc2a349  usr/lib/os-release
 cf277664b1771217d7006acdea006db1  usr/share/base-files/dot.bashrc
 d68ce7c7d7d2bb7d48aeb2f137b828e4  usr/share/base-files/dot.profile
 6db82730e03aaeeecb8fee76b73d96d4  usr/share/base-files/dot.profile.md5sums
@@ -27,6 +27,6 @@ e6a600fd5e1d9cbde2d983680233ad02  usr/share/common-licenses/LGPL-3
 815ca599c9df247a0c7f619bab123dad  usr/share/common-licenses/MPL-2.0
 05fcee15879ea1ddf57c200d22369f6a  usr/share/doc/base-files/README
 fbd937e067f0a83fb9422713a6b84a8a  usr/share/doc/base-files/README.FHS
-e0c1dacc37be0c25e94b6008aa835325  usr/share/doc/base-files/changelog.gz
+b05403a5e81513bcc2e1ef6a9ac80b25  usr/share/doc/base-files/changelog.gz
 c686090b1ff44554e2d6c541280a55b1  usr/share/doc/base-files/copyright
 07223424da25c119e376b74f04a1cb2b  usr/share/lintian/overrides/base-files

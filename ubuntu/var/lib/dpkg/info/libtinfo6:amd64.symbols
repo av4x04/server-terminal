@@ -92,6 +92,7 @@ libtinfo.so.6 libtinfo6 #MINVER#
  _nc_curr_col@NCURSES6_TINFO_5.0.19991023 6
  _nc_curr_line@NCURSES6_TINFO_5.0.19991023 6
  _nc_doalloc@NCURSES6_TINFO_5.0.19991023 6
+ _nc_env_access@NCURSES6_TINFO_5.2.20001021 6.2-0ubuntu2.1
  _nc_err_abort@NCURSES6_TINFO_5.0.19991023 6
  _nc_export_termtype2@NCURSES6_TINFO_6.1.20171230 6.1
  _nc_fallback2@NCURSES6_TINFO_6.1.20171230 6.1

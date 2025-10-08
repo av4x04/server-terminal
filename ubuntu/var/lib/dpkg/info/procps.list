@@ -51,6 +51,7 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/procps
+/usr/share/man
 /usr/share/man/de
 /usr/share/man/de/man1
 /usr/share/man/de/man1/w.1.gz

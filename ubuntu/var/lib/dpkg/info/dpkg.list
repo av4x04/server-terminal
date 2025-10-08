@@ -169,6 +169,7 @@
 /usr/share/locale/zh_TW
 /usr/share/locale/zh_TW/LC_MESSAGES
 /usr/share/locale/zh_TW/LC_MESSAGES/dpkg.mo
+/usr/share/man
 /usr/share/man/de
 /usr/share/man/de/man1
 /usr/share/man/de/man1/dpkg-deb.1.gz

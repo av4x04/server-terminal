@@ -70,6 +70,7 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/libpam-modules
+/usr/share/man
 /usr/share/man/man5
 /usr/share/man/man5/access.conf.5.gz
 /usr/share/man/man5/faillock.conf.5.gz

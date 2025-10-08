@@ -29,7 +29,7 @@
 MACHINE="x86_64"
 OS="linux-gnu"
 CC="gcc"
-CFLAGS="-g -O2 -fdebug-prefix-map=/build/bash-a6qmCk/bash-5.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wall -Wno-parentheses -Wno-format-security"
+CFLAGS="-g -O2 -fdebug-prefix-map=/build/bash-Smvct5/bash-5.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wall -Wno-parentheses -Wno-format-security"
 RELEASE="5.0"
 PATCHLEVEL="17"
 RELSTATUS="release"

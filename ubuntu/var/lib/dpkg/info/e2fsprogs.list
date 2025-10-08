@@ -51,6 +51,7 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/e2fsprogs
+/usr/share/man
 /usr/share/man/man1
 /usr/share/man/man1/chattr.1.gz
 /usr/share/man/man1/lsattr.1.gz

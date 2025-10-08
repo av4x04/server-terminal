@@ -1,6 +1,6 @@
-e94df4a0662bdd2757f484b61b0234a9  usr/lib/x86_64-linux-gnu/libapt-pkg.so.6.0.0
+b8a91e96d8ad3c22e1c49fa1768481b7  usr/lib/x86_64-linux-gnu/libapt-pkg.so.6.0.0
 4c582ebfa47ef56161dad0d3b6c88f83  usr/share/doc/libapt-pkg6.0/NEWS.Debian.gz
-a96bb379f9dfe1e8a39f66f9dd2c86e0  usr/share/doc/libapt-pkg6.0/changelog.gz
+29a7e8c9daaddb098a586e1512a439a4  usr/share/doc/libapt-pkg6.0/changelog.gz
 03b8f702638c8cc94bdb704496444513  usr/share/doc/libapt-pkg6.0/copyright
 cc7f2b044ea2696523de5aaf781a0395  usr/share/locale/ar/LC_MESSAGES/libapt-pkg6.0.mo
 4e96598962d3f880bdee51631f015b01  usr/share/locale/ast/LC_MESSAGES/libapt-pkg6.0.mo

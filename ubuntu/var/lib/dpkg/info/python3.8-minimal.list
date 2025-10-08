@@ -12,7 +12,6 @@
 /usr/share/lintian
 /usr/share/lintian/overrides
 /usr/share/lintian/overrides/python3.8-minimal
-/usr/share/man
 /usr/share/man/man1
 /usr/share/man/man1/python3.8.1.gz
 /usr/share/doc/python3.8-minimal/changelog.Debian.gz

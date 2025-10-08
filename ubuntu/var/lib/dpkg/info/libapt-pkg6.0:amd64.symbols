@@ -110,7 +110,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _Z9stringcmpN9__gnu_cxx17__normal_iteratorIPKcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES9_S9_S9_@APTPKG_6.0 0.8.0
  _Z9stringcmpPKcS0_S0_S0_@APTPKG_6.0 0.8.0
  _Z9strprintfRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPKcz@APTPKG_6.0 0.8.0
- _ZL6hash32jPKhm._GLOBAL___.._apt_pkg_pkgcache.cc_FB5499C7_0x9a50a2d5c09bbc81.ifunc@APTPKG_6.0 1.9.11~
+ _ZL6hash32jPKhm._GLOBAL___.._apt_pkg_pkgcache.cc_FB5499C7_0xf88707547e3d6814.ifunc@APTPKG_6.0 1.9.11~
  _ZN10ExtractTar2GoER12pkgDirStream@APTPKG_6.0 0.8.0
  _ZN10ExtractTar4DoneEv@APTPKG_6.0 1.1~exp12
  _ZN10ExtractTar9StartGzipEv@APTPKG_6.0 0.8.0
@@ -629,7 +629,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZN17pkgPackageManagerD0Ev@APTPKG_6.0 0.8.0
  _ZN17pkgPackageManagerD1Ev@APTPKG_6.0 0.8.0
  _ZN17pkgPackageManagerD2Ev@APTPKG_6.0 0.8.0
- _ZN18pkgDebianIndexFile5MergeER17pkgCacheGeneratorP10OpProgress@APTPKG_6.0 2.0.6
+ _ZN18pkgDebianIndexFile5MergeER17pkgCacheGeneratorP10OpProgress@APTPKG_6.0 2.0.11
  _ZN18pkgDebianIndexFileC1Eb@APTPKG_6.0 1.1~exp9
  _ZN18pkgDebianIndexFileC2Eb@APTPKG_6.0 1.1~exp9
  _ZN18pkgDebianIndexFileD0Ev@APTPKG_6.0 1.1~exp9
@@ -839,14 +839,15 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZN3APT15PackageUniverseD0Ev@APTPKG_6.0 1.1~exp9
  _ZN3APT15PackageUniverseD1Ev@APTPKG_6.0 1.1~exp9
  _ZN3APT15PackageUniverseD2Ev@APTPKG_6.0 1.1~exp9
- _ZN3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE5clearEv@APTPKG_6.0 2.0.6
- _ZN3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE6insertERKS4_@APTPKG_6.0 2.0.6
- _ZN3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE5clearEv@APTPKG_6.0 2.0.6
- _ZN3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE6insertERKS3_@APTPKG_6.0 2.0.6
- _ZN3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE5clearEv@APTPKG_6.0 2.0.6
- _ZN3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE6insertERKS4_@APTPKG_6.0 2.0.6
- _ZN3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE5clearEv@APTPKG_6.0 2.0.6
- _ZN3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE6insertERKS3_@APTPKG_6.0 2.0.6
+ _ZN3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE5clearEv@APTPKG_6.0 2.0.11
+ _ZN3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE6insertERKS4_@APTPKG_6.0 2.0.11
+ _ZN3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE5clearEv@APTPKG_6.0 2.0.11
+ _ZN3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE6insertERKS3_@APTPKG_6.0 2.0.11
+ _ZN3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE5clearEv@APTPKG_6.0 2.0.11
+ _ZN3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE6insertERKS4_@APTPKG_6.0 2.0.11
+ _ZN3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE5clearEv@APTPKG_6.0 2.0.11
+ _ZN3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE6insertERKS3_@APTPKG_6.0 2.0.11
+ _ZN3APT22KernelAutoRemoveHelper25GetProtectedKernelsFilterEP8pkgCacheb@APTPKG_6.0 2.0.11
  _ZN3APT25PackageContainerInterfaceC1ENS_14CacheSetHelper11PkgSelectorE@APTPKG_6.0 1.1~exp9
  _ZN3APT25PackageContainerInterfaceC1ERKS0_@APTPKG_6.0 1.9.11~
  _ZN3APT25PackageContainerInterfaceC1Ev@APTPKG_6.0 1.1~exp9
@@ -1201,14 +1202,14 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZNK24pkgDebianIndexTargetFile6ExistsEv@APTPKG_6.0 1.1~exp9
  _ZNK24pkgDebianIndexTargetFile8DescribeB5cxx11Eb@APTPKG_6.0 1.1~exp9
  _ZNK3APT12StateChanges5emptyEv@APTPKG_6.0 1.1~exp15
- _ZNK3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE4sizeEv@APTPKG_6.0 2.0.6
- _ZNK3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE5emptyEv@APTPKG_6.0 2.0.6
- _ZNK3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE4sizeEv@APTPKG_6.0 2.0.6
- _ZNK3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE5emptyEv@APTPKG_6.0 2.0.6
- _ZNK3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE4sizeEv@APTPKG_6.0 2.0.6
- _ZNK3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE5emptyEv@APTPKG_6.0 2.0.6
- _ZNK3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE4sizeEv@APTPKG_6.0 2.0.6
- _ZNK3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE5emptyEv@APTPKG_6.0 2.0.6
+ _ZNK3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE4sizeEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16PackageContainerINSt7__cxx114listIN8pkgCache11PkgIteratorESaIS4_EEEE5emptyEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE4sizeEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16PackageContainerISt3setIN8pkgCache11PkgIteratorESt4lessIS3_ESaIS3_EEE5emptyEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE4sizeEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16VersionContainerINSt7__cxx114listIN8pkgCache11VerIteratorESaIS4_EEEE5emptyEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE4sizeEv@APTPKG_6.0 2.0.11
+ _ZNK3APT16VersionContainerISt6vectorIN8pkgCache11VerIteratorESaIS3_EEE5emptyEv@APTPKG_6.0 2.0.11
  _ZNK6SrvReceqERKS_@APTPKG_6.0 1.1~exp15
  _ZNK8pkgCache11DepIterator10AllTargetsEv@APTPKG_6.0 0.8.0
  _ZNK8pkgCache11DepIterator10IsCriticalEv@APTPKG_6.0 0.8.0
@@ -1250,7 +1251,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZNK9metaIndex23IsArchitectureSupportedERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@APTPKG_6.0 1.1~exp15
  _ZNK9metaIndex24GetSupportsAcquireByHashEv@APTPKG_6.0 1.1~exp9
  _ZNK9metaIndex29IsArchitectureAllSupportedForERK11IndexTarget@APTPKG_6.0 1.1.9
- _ZNK9metaIndex5MergeER17pkgCacheGeneratorP10OpProgress@APTPKG_6.0 2.0.6
+ _ZNK9metaIndex5MergeER17pkgCacheGeneratorP10OpProgress@APTPKG_6.0 2.0.11
  _ZNK9metaIndex6ExistsERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@APTPKG_6.0 1.1~exp9
  _ZNK9metaIndex6GetURIB5cxx11Ev@APTPKG_6.0 0.8.0
  _ZNK9metaIndex6LookupERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@APTPKG_6.0 1.1~exp9
@@ -1468,6 +1469,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJRA20_KcS7_EEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJRA22_KcRA4_SG_EEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJRA28_KcRA5_SG_EEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
+ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJRA9_KcRA5_SG_EEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJRA9_KcRS7_EEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJS6_IPKcS5_EEEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_emplace_uniqueIJS6_IPKcSH_EEEES6_ISt17_Rb_tree_iteratorIS8_EbEDpOT_@APTPKG_6.0 0.8.0
@@ -1476,6 +1478,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE22_M_emplace_hint_uniqueIJRKSt21piecewise_construct_tSt5tupleIJRS7_EESJ_IJEEEEESt17_Rb_tree_iteratorIS8_ESt23_Rb_tree_const_iteratorIS8_EDpOT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE24_M_get_insert_unique_posERS7_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS8_ERS7_@APTPKG_6.0 0.8.0
+ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE4findERS7_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE7_M_copyINSE_11_Alloc_nodeEEEPSt13_Rb_tree_nodeIS8_EPKSI_PSt18_Rb_tree_node_baseRT_@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_S5_ESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE8_M_eraseEPSt13_Rb_tree_nodeIS8_E@APTPKG_6.0 0.8.0
  _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_St6vectorIN9pkgDPkgPM9DpkgStateESaISA_EEESt10_Select1stISD_ESt4lessIS5_ESaISD_EE14_M_insert_nodeEPSt18_Rb_tree_node_baseSL_PSt13_Rb_tree_nodeISD_E@APTPKG_6.0 0.8.0
@@ -1563,6 +1566,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZTIN10pkgRecords6ParserE@APTPKG_6.0 0.8.0
  _ZTIN11pkgDepCache11ActionGroupE@APTPKG_6.0 1.1~exp9
  _ZTIN11pkgDepCache13InRootSetFuncE@APTPKG_6.0 0.8.0
+ _ZTIN11pkgDepCache18DefaultRootSetFuncE@APTPKG_6.0 0.8.0
  _ZTIN11pkgDepCache6PolicyE@APTPKG_6.0 0.8.0
  _ZTIN11pkgSimulate6PolicyE@APTPKG_6.0 0.8.0
  _ZTIN12pkgAcqMethod11FetchResultE@APTPKG_6.0 1.1~exp9
@@ -1657,6 +1661,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZTSN10pkgRecords6ParserE@APTPKG_6.0 0.8.0
  _ZTSN11pkgDepCache11ActionGroupE@APTPKG_6.0 1.1~exp9
  _ZTSN11pkgDepCache13InRootSetFuncE@APTPKG_6.0 0.8.0
+ _ZTSN11pkgDepCache18DefaultRootSetFuncE@APTPKG_6.0 0.8.0
  _ZTSN11pkgDepCache6PolicyE@APTPKG_6.0 0.8.0
  _ZTSN11pkgSimulate6PolicyE@APTPKG_6.0 0.8.0
  _ZTSN12pkgAcqMethod11FetchResultE@APTPKG_6.0 1.1~exp9
@@ -1751,6 +1756,7 @@ libapt-pkg.so.6.0 libapt-pkg6.0 #MINVER#
  _ZTVN10pkgRecords6ParserE@APTPKG_6.0 0.8.0
  _ZTVN11pkgDepCache11ActionGroupE@APTPKG_6.0 1.1~exp9
  _ZTVN11pkgDepCache13InRootSetFuncE@APTPKG_6.0 0.8.0
+ _ZTVN11pkgDepCache18DefaultRootSetFuncE@APTPKG_6.0 0.8.0
  _ZTVN11pkgDepCache6PolicyE@APTPKG_6.0 0.8.0
  _ZTVN11pkgSimulate6PolicyE@APTPKG_6.0 0.8.0
  _ZTVN12pkgAcqMethod11FetchResultE@APTPKG_6.0 1.1~exp9
