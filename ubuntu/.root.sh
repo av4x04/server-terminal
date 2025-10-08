@@ -81,7 +81,7 @@ display_gg() {
   echo -e ""
   echo -e "           ${CYAN}-----> Mission Completed ! <----${RESET_COLOR}"
   echo -e ""
-  echo -e "${YELLOW}Type 'su' to enter root environment${RESET_COLOR}"
+  echo -e "${YELLOW}Entering root environment...${RESET_COLOR}"
   echo -e ""
   echo -e "${WHITE}___________________________________________________${RESET_COLOR}"
 }
@@ -89,6 +89,8 @@ display_gg() {
 clear
 display_gg
 
+# 👉 Chỗ này đã chỉnh: tự động su, clear, rồi mở bash trong rootfs
 $ROOTFS_DIR/usr/local/bin/proot \
   --rootfs="${ROOTFS_DIR}" \
-  -0 -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit
+  -0 -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit \
+  /bin/bash -c "su -c 'clear; exec bash'"
