@@ -150,15 +150,6 @@ function initGlobalTerm() {
 
   termReady = true;
   console.log('Global PTY ready');
-
-  // Tự động chạy lệnh khởi động sau một khoảng trễ ngắn để đảm bảo shell đã sẵn sàng.
-  setTimeout(() => {
-    if (globalTerm) {
-      console.log('Executing startup commands...');
-      // Chạy các lệnh khởi động theo yêu cầu: cd, bash root.sh, su, và clear.
-      globalTerm.write('cd ~/project/src/ && bash root.sh\r');
-    }
-  }, 500);
 }
 initGlobalTerm();
 
@@ -206,6 +197,42 @@ io.on('connection', (socket) => {
     const bytes = Buffer.byteLength(String(data), 'utf8');
     if (!bucket.take(bytes)) return; // drop nếu spam
     enqueueWrite(String(data));
+  });
+
+  socket.on('reboot-request', async () => {
+    const deployHookUrl = process.env.DEPLOY_HOOK_URL;
+    if (!deployHookUrl) {
+        console.error('DEPLOY_HOOK_URL not set. Cannot process reboot request.');
+        socket.emit('reboot-status', { 
+            success: false, 
+            message: 'Reboot command failed: DEPLOY_HOOK_URL is not configured on this server.' 
+        });
+        return;
+    }
+    
+    console.log(`Received reboot request. Triggering deploy hook.`);
+    try {
+        const response = await fetch(deployHookUrl, { method: 'POST' });
+        if (response.ok) {
+            console.log('Successfully triggered deploy hook.');
+            socket.emit('reboot-status', { 
+                success: true, 
+                message: 'Reboot signal sent successfully. The server will restart shortly.'
+            });
+        } else {
+            console.error(`Deploy hook failed with status: ${response.status} ${response.statusText}`);
+            socket.emit('reboot-status', { 
+                success: false, 
+                message: `Deploy hook request failed with status: ${response.status}` 
+            });
+        }
+    } catch (error) {
+        console.error('Error triggering deploy hook:', error);
+        socket.emit('reboot-status', { 
+            success: false, 
+            message: `Network error while triggering deploy hook: ${error.message}`
+        });
+    }
   });
 
   // KHÔNG khuyến khích resize per-client; vẫn cho phép theo 1 policy
