@@ -618,3 +618,7 @@ Package: liberror-perl
 Architecture: amd64
 Auto-Installed: 1
 
+Package: libcurl4
+Architecture: amd64
+Auto-Installed: 1
+

@@ -4164,3 +4164,41 @@
 2025-10-08 19:41:42 status unpacked axel:amd64 2.17.5-1ubuntu1
 2025-10-08 19:41:42 status half-configured axel:amd64 2.17.5-1ubuntu1
 2025-10-08 19:41:42 status installed axel:amd64 2.17.5-1ubuntu1
+2025-10-08 19:42:43 startup archives unpack
+2025-10-08 19:42:43 install libcurl4:amd64 <none> 7.68.0-1ubuntu2.25
+2025-10-08 19:42:43 status triggers-pending libc-bin:amd64 2.31-0ubuntu9.18
+2025-10-08 19:42:43 status half-installed libcurl4:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:43 status unpacked libcurl4:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:43 install curl:amd64 <none> 7.68.0-1ubuntu2.25
+2025-10-08 19:42:43 status half-installed curl:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 status unpacked curl:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 startup packages configure
+2025-10-08 19:42:44 configure libcurl4:amd64 7.68.0-1ubuntu2.25 <none>
+2025-10-08 19:42:44 status unpacked libcurl4:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 status half-configured libcurl4:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 status installed libcurl4:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 configure curl:amd64 7.68.0-1ubuntu2.25 <none>
+2025-10-08 19:42:44 status unpacked curl:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 status half-configured curl:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 status installed curl:amd64 7.68.0-1ubuntu2.25
+2025-10-08 19:42:44 trigproc libc-bin:amd64 2.31-0ubuntu9.18 <none>
+2025-10-08 19:42:44 status half-configured libc-bin:amd64 2.31-0ubuntu9.18
+2025-10-08 19:42:44 status installed libc-bin:amd64 2.31-0ubuntu9.18
+2025-10-08 19:43:02 startup archives unpack
+2025-10-08 19:43:02 install wget:amd64 <none> 1.20.3-1ubuntu2.1
+2025-10-08 19:43:02 status half-installed wget:amd64 1.20.3-1ubuntu2.1
+2025-10-08 19:43:02 status unpacked wget:amd64 1.20.3-1ubuntu2.1
+2025-10-08 19:43:02 startup packages configure
+2025-10-08 19:43:02 configure wget:amd64 1.20.3-1ubuntu2.1 <none>
+2025-10-08 19:43:02 status unpacked wget:amd64 1.20.3-1ubuntu2.1
+2025-10-08 19:43:02 status half-configured wget:amd64 1.20.3-1ubuntu2.1
+2025-10-08 19:43:02 status installed wget:amd64 1.20.3-1ubuntu2.1
+2025-10-08 19:43:14 startup archives unpack
+2025-10-08 19:43:14 install nano:amd64 <none> 4.8-1ubuntu1.1
+2025-10-08 19:43:14 status half-installed nano:amd64 4.8-1ubuntu1.1
+2025-10-08 19:43:14 status unpacked nano:amd64 4.8-1ubuntu1.1
+2025-10-08 19:43:14 startup packages configure
+2025-10-08 19:43:14 configure nano:amd64 4.8-1ubuntu1.1 <none>
+2025-10-08 19:43:14 status unpacked nano:amd64 4.8-1ubuntu1.1
+2025-10-08 19:43:14 status half-configured nano:amd64 4.8-1ubuntu1.1
+2025-10-08 19:43:14 status installed nano:amd64 4.8-1ubuntu1.1

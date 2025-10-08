@@ -493,3 +493,18 @@ Start-Date: 2025-10-08  19:41:41
 Commandline: apt install axel
 Install: axel:amd64 (2.17.5-1ubuntu1)
 End-Date: 2025-10-08  19:41:42
+
+Start-Date: 2025-10-08  19:42:43
+Commandline: apt install curl
+Install: libcurl4:amd64 (7.68.0-1ubuntu2.25, automatic), curl:amd64 (7.68.0-1ubuntu2.25)
+End-Date: 2025-10-08  19:42:44
+
+Start-Date: 2025-10-08  19:43:02
+Commandline: apt install wget
+Install: wget:amd64 (1.20.3-1ubuntu2.1)
+End-Date: 2025-10-08  19:43:02
+
+Start-Date: 2025-10-08  19:43:14
+Commandline: apt install nano
+Install: nano:amd64 (4.8-1ubuntu1.1)
+End-Date: 2025-10-08  19:43:14

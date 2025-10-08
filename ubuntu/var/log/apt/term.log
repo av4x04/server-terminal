@@ -1026,3 +1026,36 @@ Preparing to unpack .../axel_2.17.5-1ubuntu1_amd64.deb ...
 Unpacking axel (2.17.5-1ubuntu1) ...
 Setting up axel (2.17.5-1ubuntu1) ...
 Log ended: 2025-10-08  19:41:42
+
+Log started: 2025-10-08  19:42:43
+Selecting previously unselected package libcurl4:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14154 files and directories currently installed.)
+Preparing to unpack .../libcurl4_7.68.0-1ubuntu2.25_amd64.deb ...
+Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.25) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.68.0-1ubuntu2.25_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.25) ...
+Setting up libcurl4:amd64 (7.68.0-1ubuntu2.25) ...
+Setting up curl (7.68.0-1ubuntu2.25) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.18) ...
+Log ended: 2025-10-08  19:42:44
+
+Log started: 2025-10-08  19:43:02
+Selecting previously unselected package wget.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14167 files and directories currently installed.)
+Preparing to unpack .../wget_1.20.3-1ubuntu2.1_amd64.deb ...
+Unpacking wget (1.20.3-1ubuntu2.1) ...
+Setting up wget (1.20.3-1ubuntu2.1) ...
+Log ended: 2025-10-08  19:43:02
+
+Log started: 2025-10-08  19:43:14
+Selecting previously unselected package nano.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14178 files and directories currently installed.)
+Preparing to unpack .../nano_4.8-1ubuntu1.1_amd64.deb ...
+Unpacking nano (4.8-1ubuntu1.1) ...
+Setting up nano (4.8-1ubuntu1.1) ...
+update-alternatives: using /bin/nano to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group editor) doesn't exist
+update-alternatives: using /bin/nano to provide /usr/bin/pico (pico) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/pico.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group pico) doesn't exist
+Log ended: 2025-10-08  19:43:14

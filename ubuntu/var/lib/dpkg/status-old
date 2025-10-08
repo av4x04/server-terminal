@@ -67,7 +67,7 @@ Description: commandline package manager
 Original-Maintainer: APT Development Team <deity@lists.debian.org>
 
 Package: axel
-Status: install ok unpacked
+Status: install ok installed
 Priority: optional
 Section: web
 Installed-Size: 201
@@ -274,6 +274,28 @@ Description: GNU core utilities
  uniq unlink users vdir wc who whoami yes
 Homepage: http://gnu.org/software/coreutils
 Original-Maintainer: Michael Stone <mstone@debian.org>
+
+Package: curl
+Status: install ok installed
+Priority: optional
+Section: web
+Installed-Size: 404
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: foreign
+Version: 7.68.0-1ubuntu2.25
+Depends: libc6 (>= 2.17), libcurl4 (= 7.68.0-1ubuntu2.25), zlib1g (>= 1:1.1.4)
+Description: command line tool for transferring data with URL syntax
+ curl is a command line tool for transferring data with URL syntax, supporting
+ DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3,
+ POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.
+ .
+ curl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form
+ based upload, proxies, cookies, user+password authentication (Basic, Digest,
+ NTLM, Negotiate, kerberos...), file transfer resume, proxy tunneling and a
+ busload of other useful tricks.
+Homepage: http://curl.haxx.se
+Original-Maintainer: Alessandro Ghedini <ghedo@debian.org>
 
 Package: dash
 Essential: yes
@@ -1876,6 +1898,38 @@ Description: easy-to-use client-side URL transfer library (GnuTLS flavour)
  successful companies and numerous applications.
  .
  SSL support is provided by GnuTLS.
+Homepage: http://curl.haxx.se
+Original-Maintainer: Alessandro Ghedini <ghedo@debian.org>
+
+Package: libcurl4
+Status: install ok installed
+Priority: optional
+Section: libs
+Installed-Size: 699
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: curl
+Version: 7.68.0-1ubuntu2.25
+Replaces: libcurl3
+Depends: libbrotli1 (>= 0.6.0), libc6 (>= 2.17), libgssapi-krb5-2 (>= 1.17), libidn2-0 (>= 0.6), libldap-2.4-2 (>= 2.4.7), libnghttp2-14 (>= 1.12.0), libpsl5 (>= 0.16.0), librtmp1 (>= 2.4+20131018.git79459a2-3~), libssh-4 (>= 0.8.0), libssl1.1 (>= 1.1.1), zlib1g (>= 1:1.1.4)
+Recommends: ca-certificates
+Conflicts: libcurl3
+Description: easy-to-use client-side URL transfer library (OpenSSL flavour)
+ libcurl is an easy-to-use client-side URL transfer library, supporting DICT,
+ FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S,
+ RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.
+ .
+ libcurl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP
+ form based upload, proxies, cookies, user+password authentication (Basic,
+ Digest, NTLM, Negotiate, Kerberos), file transfer resume, http proxy tunneling
+ and more!
+ .
+ libcurl is free, thread-safe, IPv6 compatible, feature rich, well supported,
+ fast, thoroughly documented and is already used by many known, big and
+ successful companies and numerous applications.
+ .
+ SSL support is provided by OpenSSL.
 Homepage: http://curl.haxx.se
 Original-Maintainer: Alessandro Ghedini <ghedo@debian.org>
 
@@ -4594,6 +4648,42 @@ Description: tools for mounting and manipulating filesystems
 Important: yes
 Original-Maintainer: LaMont Jones <lamont@debian.org>
 
+Package: nano
+Status: install ok unpacked
+Priority: important
+Section: editors
+Installed-Size: 848
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 4.8-1ubuntu1.1
+Replaces: nano-tiny (<< 2.8.6-2), pico
+Depends: libc6 (>= 2.27), libncursesw6 (>= 6), libtinfo6 (>= 6)
+Suggests: hunspell
+Breaks: nano-tiny (<< 2.8.6-2)
+Conflicts: pico
+Conffiles:
+ /etc/nanorc newconffile
+Description: small, friendly text editor inspired by Pico
+ GNU nano is an easy-to-use text editor originally designed as a replacement
+ for Pico, the ncurses-based editor from the non-free mailer package Pine
+ (itself now available under the Apache License as Alpine).
+ .
+ However, GNU nano also implements many features missing in Pico, including:
+  - undo/redo
+  - line numbering
+  - syntax coloring
+  - soft-wrapping of overlong lines
+  - selecting text by holding Shift
+  - interactive search and replace (with regular expression support)
+  - a go-to line (and column) command
+  - support for multiple file buffers
+  - auto-indentation
+  - tab completion of filenames and search terms
+  - toggling features while running
+  - and full internationalization support
+Homepage: https://www.nano-editor.org/
+Original-Maintainer: Jordi Mallach <jordi@debian.org>
+
 Package: ncurses-base
 Essential: yes
 Status: install ok installed
@@ -5889,6 +5979,42 @@ Description: miscellaneous system utilities
  messages, create new filesystems, view block device information,
  interface with real time clock, etc.
 Original-Maintainer: LaMont Jones <lamont@debian.org>
+
+Package: wget
+Status: install ok installed
+Priority: standard
+Section: web
+Installed-Size: 988
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: foreign
+Version: 1.20.3-1ubuntu2.1
+Depends: libc6 (>= 2.17), libidn2-0 (>= 0.6), libpcre2-8-0 (>= 10.22), libpsl5 (>= 0.16.0), libssl1.1 (>= 1.1.0), libuuid1 (>= 2.16), zlib1g (>= 1:1.1.4)
+Recommends: ca-certificates
+Conflicts: wget-ssl
+Conffiles:
+ /etc/wgetrc c43064699caf6109f4b3da0405c06ebb
+Description: retrieves files from the web
+ Wget is a network utility to retrieve files from the web
+ using HTTP(S) and FTP, the two most widely used internet
+ protocols. It works non-interactively, so it will work in
+ the background, after having logged off. The program supports
+ recursive retrieval of web-authoring pages as well as FTP
+ sites -- you can use Wget to make mirrors of archives and
+ home pages or to travel the web like a WWW robot.
+ .
+ Wget works particularly well with slow or unstable connections
+ by continuing to retrieve a document until the document is fully
+ downloaded. Re-getting files from where it left off works on
+ servers (both HTTP and FTP) that support it. Both HTTP and FTP
+ retrievals can be time stamped, so Wget can see if the remote
+ file has changed since the last retrieval and automatically
+ retrieve the new version if it has.
+ .
+ Wget supports proxy servers; this can lighten the network load,
+ speed up retrieval, and provide access behind firewalls.
+Homepage: https://www.gnu.org/software/wget/
+Original-Maintainer: Noël Köthe <noel@debian.org>
 
 Package: xauth
 Status: install ok installed
