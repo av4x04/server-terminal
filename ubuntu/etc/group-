@@ -41,3 +41,4 @@ systemd-timesync:x:101:
 systemd-journal:x:102:
 systemd-network:x:103:
 systemd-resolve:x:104:
+messagebus:x:105:

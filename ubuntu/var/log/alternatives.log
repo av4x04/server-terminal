@@ -33,3 +33,12 @@ update-alternatives 2025-10-08 16:32:44: run with --remove pager /usr/bin/pg
 update-alternatives 2025-10-08 16:32:55: run with --install /usr/bin/w w /usr/bin/w.procps 50 --slave /usr/share/man/man1/w.1.gz w.1.gz /usr/share/man/man1/w.procps.1.gz
 update-alternatives 2025-10-08 19:37:40: run with --quiet --install /usr/bin/pinentry pinentry /usr/bin/pinentry-curses 50 --slave /usr/share/man/man1/pinentry.1.gz pinentry.1.gz /usr/share/man/man1/pinentry-curses.1.gz
 update-alternatives 2025-10-08 19:37:40: link group pinentry updated to point to /usr/bin/pinentry-curses
+update-alternatives 2025-10-08 19:41:02: run with --quiet --install /usr/bin/pager pager /usr/bin/less 77 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/less.1.gz
+update-alternatives 2025-10-08 19:41:02: link group pager updated to point to /usr/bin/less
+update-alternatives 2025-10-08 19:41:02: run with --quiet --remove pager /bin/less
+update-alternatives 2025-10-08 19:41:02: run with --quiet --install /usr/bin/rsh rsh /usr/bin/ssh 20 --slave /usr/share/man/man1/rsh.1.gz rsh.1.gz /usr/share/man/man1/ssh.1.gz
+update-alternatives 2025-10-08 19:41:02: link group rsh updated to point to /usr/bin/ssh
+update-alternatives 2025-10-08 19:41:02: run with --quiet --install /usr/bin/rlogin rlogin /usr/bin/slogin 20 --slave /usr/share/man/man1/rlogin.1.gz rlogin.1.gz /usr/share/man/man1/slogin.1.gz
+update-alternatives 2025-10-08 19:41:02: link group rlogin updated to point to /usr/bin/slogin
+update-alternatives 2025-10-08 19:41:02: run with --quiet --install /usr/bin/rcp rcp /usr/bin/scp 20 --slave /usr/share/man/man1/rcp.1.gz rcp.1.gz /usr/share/man/man1/scp.1.gz
+update-alternatives 2025-10-08 19:41:02: link group rcp updated to point to /usr/bin/scp
