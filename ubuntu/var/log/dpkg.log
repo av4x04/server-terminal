@@ -4155,3 +4155,12 @@
 2025-10-08 19:41:03 trigproc mime-support:all 3.64ubuntu1 <none>
 2025-10-08 19:41:03 status half-configured mime-support:all 3.64ubuntu1
 2025-10-08 19:41:03 status installed mime-support:all 3.64ubuntu1
+2025-10-08 19:41:42 startup archives unpack
+2025-10-08 19:41:42 install axel:amd64 <none> 2.17.5-1ubuntu1
+2025-10-08 19:41:42 status half-installed axel:amd64 2.17.5-1ubuntu1
+2025-10-08 19:41:42 status unpacked axel:amd64 2.17.5-1ubuntu1
+2025-10-08 19:41:42 startup packages configure
+2025-10-08 19:41:42 configure axel:amd64 2.17.5-1ubuntu1 <none>
+2025-10-08 19:41:42 status unpacked axel:amd64 2.17.5-1ubuntu1
+2025-10-08 19:41:42 status half-configured axel:amd64 2.17.5-1ubuntu1
+2025-10-08 19:41:42 status installed axel:amd64 2.17.5-1ubuntu1
