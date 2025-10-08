@@ -68,6 +68,11 @@
       justify-content: space-between;
       gap: 12px;
     }
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     .brand {
       display: flex;
       align-items: center;
@@ -324,6 +329,11 @@
       color: var(--muted);
       font-size: 13px;
     }
+    .foot-shortcuts {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
     .kbd {
       background: rgba(255,255,255,0.02);
       padding: 6px 10px;
@@ -371,7 +381,18 @@
 
     /* Responsive */
     @media (max-width: 900px) {
+      body {
+        overflow-x: hidden;
+      }
       .app { padding: 14px; gap: 14px; }
+
+      .topbar {
+        flex-wrap: wrap;
+      }
+      .topbar-right {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
       
       .title .main { font-size: 15px; }
       .title .sub { display: none; }
@@ -410,11 +431,18 @@
           display: inline-flex;
           margin-left: auto;
       }
+      
+      .shell-info {
+        display: none;
+      }
 
       .foot {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+      }
+      .foot .foot-shortcuts {
+        flex-wrap: wrap;
       }
     }
   </style>
@@ -423,7 +451,7 @@
   <div class="app">
     <!-- Top bar / Brand -->
     <div class="topbar">
-      <div style="display:flex;align-items:center;gap:12px">
+      <div class="topbar-left">
         <button class="btn ghost mobile-menu-btn" onclick="toggleMenu()" title="Mở menu">
           <i class="fas fa-bars"></i>
         </button>
@@ -441,7 +469,7 @@
       </div>
 
       <!-- Connection status + buttons -->
-      <div style="display:flex;align-items:center;gap:12px">
+      <div class="topbar-right">
         <div class="status">
           <div class="status-dot" id="status-dot"></div>
           <div id="status-text">Đang kết nối...</div>
@@ -498,12 +526,12 @@
               <div class="dot max"></div>
             </div>
             <div style="margin-left:12px;font-weight:600;color:#dff8ef">Terminal</div>
-            <div style="margin-left:auto;color:var(--muted);font-size:13px">Shell: bash · UTF-8</div>
+            <div class="shell-info" style="margin-left:auto;color:var(--muted);font-size:13px">Shell: bash · UTF-8</div>
           </div>
           <div id="terminal"></div>
           <div style="height:8px"></div>
           <div class="foot">
-            <div style="display:flex;gap:8px;align-items:center">
+            <div class="foot-shortcuts">
               <div class="kbd">Ctrl + C</div>
               <div class="kbd">Ctrl + L</div>
               <div style="color:var(--muted);font-size:13px">Dùng phím tắt để thao tác nhanh</div>
