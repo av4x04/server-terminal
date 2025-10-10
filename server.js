@@ -64,7 +64,6 @@ class RingBuffer {
 
 const sessions = new Map();
 const HISTORY_LIMIT = 1024 * 512; // 512KB per session
-let sessionCounter = 0;
 
 function enqueueWrite(session, chunk) {
   session.writeQueue.push(chunk);
@@ -85,6 +84,26 @@ function drainWrites(session) {
   })();
 }
 
+function getNextSessionNumber() {
+    const usedNumbers = Array.from(sessions.values())
+        .map(s => {
+            const match = s.name.match(/^Session (\d+)$/);
+            return match ? parseInt(match[1], 10) : null;
+        })
+        .filter(n => n !== null)
+        .sort((a, b) => a - b);
+    
+    let nextNumber = 1;
+    for (const num of usedNumbers) {
+        if (num === nextNumber) {
+            nextNumber++;
+        } else {
+            break; // Found a gap
+        }
+    }
+    return nextNumber;
+}
+
 function createSession(isInitial = false) {
   const id = uuidv4();
   let ptyProc;
@@ -102,10 +121,10 @@ function createSession(isInitial = false) {
     return null;
   }
 
-  sessionCounter++;
+  const sessionNumber = getNextSessionNumber();
   const session = {
     id,
-    name: `Session ${sessionCounter}`,
+    name: `Session ${sessionNumber}`,
     pty: ptyProc,
     history: new RingBuffer(HISTORY_LIMIT),
     writeQueue: [],
