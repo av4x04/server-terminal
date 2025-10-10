@@ -105,7 +105,7 @@ function createSession(isInitial = false) {
   sessionCounter++;
   const session = {
     id,
-    name: `Phiên ${sessionCounter}`,
+    name: `Session ${sessionCounter}`,
     pty: ptyProc,
     history: new RingBuffer(HISTORY_LIMIT),
     writeQueue: [],
