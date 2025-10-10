@@ -12,82 +12,161 @@ const term = new Terminal({
   cursorStyle: 'block',
   allowTransparency: true
 });
-
 term.open(document.getElementById('terminal'));
 
-const socket = io();
+const socket = io({ transports: ['websocket'] });
 
-// --- DOM Elements & Loader Logic ---
+// --- State Management ---
+let sessions = new Map();
+let activeSessionId = null;
+
+// --- DOM Elements ---
 const statusText = document.getElementById('status-text');
-const loader = document.getElementById('loader');
-const loaderText = document.getElementById('loader-text');
-const terminalContainer = document.getElementById('terminal');
+const tabsContainer = document.getElementById('terminal-tabs-container');
 
-function showLoader(text) {
-  loaderText.textContent = text;
-  loader.style.display = 'flex';
-  terminalContainer.style.opacity = '0.2';
+// --- Session & UI Management ---
+function renderTabs() {
+  tabsContainer.innerHTML = '';
+  
+  sessions.forEach(session => {
+    const tab = document.createElement('button');
+    tab.className = 'tab-btn';
+    tab.dataset.sessionId = session.id;
+    tab.textContent = session.name;
+    if (session.id === activeSessionId) {
+      tab.classList.add('active');
+    }
+
+    const closeBtn = document.createElement('i');
+    closeBtn.className = 'fas fa-times close-tab-btn';
+    closeBtn.title = 'Đóng phiên';
+    closeBtn.onclick = (e) => {
+      e.stopPropagation();
+      if (sessions.size > 1 && confirm(`Bạn có chắc muốn đóng "${session.name}" không?`)) {
+        socket.emit('close-session', session.id);
+      }
+    };
+
+    if (sessions.size > 1) {
+      tab.appendChild(closeBtn);
+    }
+
+    tab.onclick = () => {
+      if (session.id !== activeSessionId) {
+        switchSession(session.id);
+      }
+    };
+    tabsContainer.appendChild(tab);
+  });
+
+  const addSessionBtn = document.createElement('button');
+  addSessionBtn.className = 'add-tab-btn';
+  addSessionBtn.title = 'Phiên mới';
+  addSessionBtn.textContent = '+';
+  addSessionBtn.onclick = () => {
+    socket.emit('create-session', (newSession) => {
+        if (newSession) {
+            console.log('Server đã xác nhận tạo phiên:', newSession.name);
+        }
+    });
+  };
+  tabsContainer.appendChild(addSessionBtn);
 }
 
-function hideLoader() {
-  loader.style.display = 'none';
-  terminalContainer.style.opacity = '1';
+function switchSession(sessionId) {
+  if (!sessions.has(sessionId) || sessionId === activeSessionId) return;
+  
+  activeSessionId = sessionId;
+  socket.emit('switch-session', sessionId);
+  term.reset();
+  renderTabs();
+  resizeTerminal();
   term.focus();
 }
 
+function resizeTerminal() {
+    if (!activeSessionId) return;
+    setTimeout(() => {
+        term.fit(); // You might need the fit addon for this. Or manually calculate.
+        socket.emit('resize', { sessionId: activeSessionId, cols: term.cols, rows: term.rows });
+    }, 0);
+}
 
 // --- Socket Event Handlers ---
-
-// Khi người dùng gõ phím trong terminal trên trình duyệt
-term.onData(data => {
-  // Gửi dữ liệu đó đến server
-  socket.emit('input', data);
+socket.on('sessions-list', (sessionList) => {
+  sessions.clear();
+  sessionList.forEach(s => sessions.set(s.id, s));
+  
+  if (sessions.size > 0 && !sessions.has(activeSessionId)) {
+    const firstSessionId = sessions.keys().next().value;
+    switchSession(firstSessionId);
+  } else {
+    renderTabs();
+  }
 });
 
-// Khi server gửi dữ liệu output về
+socket.on('session-created', (session) => {
+  sessions.set(session.id, session);
+  renderTabs();
+  switchSession(session.id); // Automatically switch to the new session
+});
+
+socket.on('session-closed', ({ id }) => {
+  const wasActive = (id === activeSessionId);
+  if (sessions.has(id)) {
+    sessions.delete(id);
+    
+    if (wasActive && sessions.size > 0) {
+      const nextSessionId = sessions.keys().next().value;
+      switchSession(nextSessionId);
+    } else if (sessions.size === 0) {
+      activeSessionId = null;
+      term.reset();
+      term.write('\x1b[31mTất cả các phiên đã đóng. Hãy tạo một phiên mới.\x1b[0m\r\n');
+      renderTabs();
+    } else {
+      renderTabs();
+    }
+  }
+});
+
+term.onData(data => {
+  if (activeSessionId) {
+    socket.emit('input', { sessionId: activeSessionId, data });
+  }
+});
+
 socket.on('output', data => {
-  // Ghi dữ liệu đó vào terminal trên trình duyệt
   term.write(data);
 });
 
-// Khi nhận lịch sử terminal từ server
 socket.on('history', history => {
+  term.reset();
   term.write(history);
 });
 
-// Xử lý resize terminal
-function resizeTerminal() {
-  const cols = term.cols;
-  const rows = term.rows;
-  socket.emit('resize', { cols, rows });
-}
-
-// Resize khi thay đổi kích thước cửa sổ
 window.addEventListener('resize', resizeTerminal);
 
-// Resize ban đầu
-resizeTerminal();
-
-// Khi kết nối thành công
 socket.on('connect', () => {
   console.log('🟢 Đã kết nối đến server');
   statusText.textContent = 'Đã kết nối';
-  hideLoader();
+  // Server will send 'sessions-list'
 });
 
-// Khi mất kết nối
 socket.on('disconnect', () => {
   console.log('🔴 Mất kết nối với server');
   statusText.textContent = 'Mất kết nối';
-  showLoader('Mất kết nối. Đang thử lại... ⏳');
   term.write('\x1b[31m⚠️  Mất kết nối với server. Đang thử kết nối lại...\x1b[0m\r\n');
 });
 
 socket.on('connect_error', () => {
-    statusText.textContent = 'Lỗi kết nối';
-    showLoader('Không thể kết nối! 😭');
+  statusText.textContent = 'Lỗi kết nối';
 });
 
-
-// Initial state
-showLoader('Đang vỗ cánh kết nối...');
+// Make terminal background transparent
+window.addEventListener('load', () => {
+  const termEl = document.querySelector('.xterm-viewport');
+  if (termEl) {
+    termEl.style.backgroundColor = 'transparent';
+  }
+});
