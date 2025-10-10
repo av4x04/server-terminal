@@ -4,24 +4,21 @@ const http = require('http');
 const { Server } = require('socket.io');
 const pty = require('node-pty');
 const os = require('os');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const server = http.createServer(app);
 
-// Socket.IO tối ưu cho realtime terminal (giữ 1 session)
 const io = new Server(server, {
   pingInterval: 25000,
   pingTimeout: 60000,
-  maxHttpBufferSize: 1e6, // 1 MB
+  maxHttpBufferSize: 1e6,
   perMessageDeflate: false,
   cors: { origin: '*' }
 });
 
 const SHELL = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 
-/* -------------------------
-   RingBuffer (fixed bytes) để lưu history
-   ------------------------- */
 class RingBuffer {
   constructor(limitBytes) {
     this.buf = Buffer.allocUnsafe(limitBytes);
@@ -63,59 +60,37 @@ class RingBuffer {
       ]).toString(enc);
     }
   }
-  bytes() { return this.len; }
 }
 
-/* -------------------------
-   Global state (1 session)
-   ------------------------- */
-const HISTORY_LIMIT = 1024 * 512; // 512KB
-const history = new RingBuffer(HISTORY_LIMIT);
+const sessions = new Map();
+const HISTORY_LIMIT = 1024 * 512; // 512KB per session
+let sessionCounter = 0;
 
-let globalTerm = null;
-let termReady = false;
-
-/* -------------------------
-   Single write queue (single writer)
-   ------------------------- */
-const writeQueue = [];
-let writing = false;
-function enqueueWrite(chunk) {
-  writeQueue.push(chunk);
-  if (!writing) drainWrites();
+function enqueueWrite(session, chunk) {
+  session.writeQueue.push(chunk);
+  if (!session.writing) drainWrites(session);
 }
-function drainWrites() {
-  if (writing) return;
-  writing = true;
+
+function drainWrites(session) {
+  if (session.writing || !session.pty) return;
+  session.writing = true;
   (function loop() {
-    if (!globalTerm || writeQueue.length === 0) {
-      writing = false;
+    if (!session.pty || session.writeQueue.length === 0) {
+      session.writing = false;
       return;
     }
-    const data = writeQueue.shift();
-    try { globalTerm.write(data); } catch (err) { console.error('PTY write error', err); }
+    const data = session.writeQueue.shift();
+    try { session.pty.write(data); } catch (err) { console.error(`PTY [${session.id}] write error`, err); }
     setImmediate(loop);
   })();
 }
 
-/* -------------------------
-   PTY restart backoff
-   ------------------------- */
-let restartAttempts = 0;
-function scheduleRestart() {
-  const delay = Math.min(30000, 500 * Math.pow(2, restartAttempts));
-  restartAttempts += 1;
-  setTimeout(initGlobalTerm, delay);
-}
+function createSession(isInitial = false) {
+  const id = uuidv4();
+  let ptyProc;
 
-/* -------------------------
-   Init global PTY
-   ------------------------- */
-function initGlobalTerm() {
-  if (globalTerm) return;
-  restartAttempts = 0;
   try {
-    globalTerm = pty.spawn(SHELL, [], {
+    ptyProc = pty.spawn(SHELL, [], {
       name: 'xterm-color',
       cols: 80,
       rows: 30,
@@ -124,134 +99,124 @@ function initGlobalTerm() {
     });
   } catch (err) {
     console.error('Failed to spawn PTY:', err);
-    scheduleRestart();
-    return;
+    return null;
   }
 
-  globalTerm.on('data', (d) => {
+  sessionCounter++;
+  const session = {
+    id,
+    name: `Phiên ${sessionCounter}`,
+    pty: ptyProc,
+    history: new RingBuffer(HISTORY_LIMIT),
+    writeQueue: [],
+    writing: false,
+  };
+
+  ptyProc.on('data', (d) => {
     try {
-      history.append(d);
-      io.emit('output', d); // realtime broadcast giữ nguyên
+      session.history.append(d);
+      io.to(session.id).emit('output', d);
     } catch (err) {
-      console.error('Error on PTY data:', err);
+      console.error(`Error on PTY data for session ${session.id}:`, err);
     }
   });
 
-  globalTerm.on('error', (err) => {
-    console.error('PTY error:', err);
+  ptyProc.on('exit', (code) => {
+    console.log(`PTY for session ${session.id} exited with code ${code}`);
+    sessions.delete(session.id);
+    io.emit('session-closed', { id: session.id, name: session.name });
   });
 
-  globalTerm.on('exit', (code) => {
-    console.error('Global PTY exited code', code);
-    try { globalTerm = null; } catch (e) {}
-    termReady = false;
-    scheduleRestart();
-  });
+  sessions.set(id, session);
+  console.log(`Created session ${session.name} (${session.id})`);
+  io.emit('session-created', { id: session.id, name: session.name });
 
-  termReady = true;
-  console.log('Global PTY ready');
+  if (isInitial) {
+    setTimeout(() => {
+        if (session.pty) {
+          console.log('Executing startup commands for initial session...');
+          enqueueWrite(session, 'cd ~/project/src/ && bash root.sh\r');
+        }
+    }, 500);
+  }
 
-  // Tự động chạy lệnh khởi động sau một khoảng trễ ngắn để đảm bảo shell đã sẵn sàng
-
-  setTimeout(() => {
-    if (globalTerm) {
-      console.log('Executing startup commands...');
-      // Chạy các lệnh khởi động theo yêu cầu: cd, bash root.sh, su, và clear.
-      globalTerm.write('cd ~/project/src/ && bash root.sh\r');
-    }
-  }, 500);
+  return session;
 }
-initGlobalTerm();
+
+// Initialize with one session
+if (sessions.size === 0) {
+    createSession(true);
+}
 
 app.use(express.static('public'));
 
-/* -------------------------
-   Token bucket per socket (rate-limit)
-   ------------------------- */
 function createBucket(capacity = 4096, refillRate = 4096) {
-  let tokens = capacity;
-  let last = Date.now();
+  let tokens = capacity; let last = Date.now();
   return {
     take(n = 1) {
-      const now = Date.now();
-      const delta = now - last;
+      const now = Date.now(); const delta = now - last;
       if (delta > 0) {
         tokens = Math.min(capacity, tokens + (delta / 1000) * refillRate);
         last = now;
       }
-      if (tokens >= n) {
-        tokens -= n;
-        return true;
-      }
+      if (tokens >= n) { tokens -= n; return true; }
       return false;
     }
   };
 }
 
-/* -------------------------
-   Socket handlers
-   ------------------------- */
 io.on('connection', (socket) => {
   console.log('Client connected', socket.id);
 
-  // gửi history 1 lần cho client mới
-  if (termReady) {
-    const h = history.toString();
-    if (h.length) socket.emit('history', h);
-  }
+  const sessionList = Array.from(sessions.values()).map(s => ({ id: s.id, name: s.name }));
+  socket.emit('sessions-list', sessionList);
 
-  const bucket = createBucket(4096, 4096); // 4KB burst, refill 4KB/s
+  const bucket = createBucket(4096, 4096);
 
-  socket.on('input', (data) => {
-    if (!termReady || !globalTerm) return;
+  socket.on('switch-session', (sessionId) => {
+    socket.rooms.forEach(room => {
+      if (room !== socket.id) socket.leave(room);
+    });
+
+    const session = sessions.get(sessionId);
+    if (session) {
+      socket.join(sessionId);
+      console.log(`Socket ${socket.id} switched to session ${sessionId}`);
+      const h = session.history.toString();
+      if (h.length) socket.emit('history', h);
+    }
+  });
+
+  socket.on('create-session', (callback) => {
+    const newSession = createSession(false);
+    if (newSession && typeof callback === 'function') {
+        callback({ id: newSession.id, name: newSession.name });
+    }
+  });
+
+  socket.on('close-session', (sessionId) => {
+    const session = sessions.get(sessionId);
+    if (session) {
+      console.log(`Closing session ${sessionId} by client request.`);
+      session.pty.kill();
+    }
+  });
+
+  socket.on('input', ({ sessionId, data }) => {
+    const session = sessions.get(sessionId);
+    if (!session) return;
     const bytes = Buffer.byteLength(String(data), 'utf8');
-    if (!bucket.take(bytes)) return; // drop nếu spam
-    enqueueWrite(String(data));
+    if (!bucket.take(bytes)) return;
+    enqueueWrite(session, String(data));
   });
 
-  socket.on('reboot-request', async () => {
-    const deployHookUrl = process.env.DEPLOY_HOOK_URL;
-    if (!deployHookUrl) {
-        console.error('DEPLOY_HOOK_URL not set. Cannot process reboot request.');
-        socket.emit('reboot-status', { 
-            success: false, 
-            message: 'Reboot command failed: DEPLOY_HOOK_URL is not configured on this server.' 
-        });
-        return;
-    }
-    
-    console.log(`Received reboot request. Triggering deploy hook.`);
-    try {
-        const response = await fetch(deployHookUrl, { method: 'POST' });
-        if (response.ok) {
-            console.log('Successfully triggered deploy hook.');
-            socket.emit('reboot-status', { 
-                success: true, 
-                message: 'Reboot signal sent successfully. The server will restart shortly.'
-            });
-        } else {
-            console.error(`Deploy hook failed with status: ${response.status} ${response.statusText}`);
-            socket.emit('reboot-status', { 
-                success: false, 
-                message: `Deploy hook request failed with status: ${response.status}` 
-            });
-        }
-    } catch (error) {
-        console.error('Error triggering deploy hook:', error);
-        socket.emit('reboot-status', { 
-            success: false, 
-            message: `Network error while triggering deploy hook: ${error.message}`
-        });
-    }
-  });
-
-  // KHÔNG khuyến khích resize per-client; vẫn cho phép theo 1 policy
-  socket.on('resize', (d) => {
-    if (!termReady || !globalTerm) return;
-    const cols = Number(d.cols) || 80;
-    const rows = Number(d.rows) || 30;
+  socket.on('resize', ({ sessionId, cols, rows }) => {
+    const session = sessions.get(sessionId);
+    if (!session) return;
+    cols = Number(cols) || 80;
+    rows = Number(rows) || 30;
     if (cols < 40 || cols > 1000 || rows < 10 || rows > 400) return;
-    try { globalTerm.resize(cols, rows); } catch (e) { /* ignore */ }
+    try { session.pty.resize(cols, rows); } catch (e) { /* ignore */ }
   });
 
   socket.on('disconnect', (reason) => {
@@ -259,22 +224,18 @@ io.on('connection', (socket) => {
   });
 });
 
-/* -------------------------
-   Global error handlers & graceful shutdown
-   ------------------------- */
 process.on('uncaughtException', (err) => { console.error('Uncaught exception', err); });
 process.on('unhandledRejection', (r) => { console.error('Unhandled rejection', r); });
 
 function shutdown() {
   console.log('Shutdown');
-  try { if (globalTerm) globalTerm.kill(); } catch (e) {}
+  sessions.forEach(session => {
+    try { if (session.pty) session.pty.kill(); } catch (e) {}
+  });
   server.close(() => process.exit(0));
 }
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
-/* -------------------------
-   Start server
-   ------------------------- */
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
