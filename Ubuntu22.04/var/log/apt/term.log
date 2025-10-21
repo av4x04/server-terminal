@@ -289,3 +289,309 @@ Use --help for help about diverting files.
 Errors were encountered while processing:
  /var/cache/apt/archives/libc6_2.39-0ubuntu8.6_amd64.deb
 Log ended: 2025-10-21  02:01:17
+
+Log started: 2025-10-21  02:03:49
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6621 files and directories currently installed.)
+Preparing to unpack .../libssl3t64_3.0.13-0ubuntu3.6_amd64.deb ...
+Unpacking libssl3t64:amd64 (3.0.13-0ubuntu3.6) over (3.0.13-0ubuntu3.5) ...
+Setting up libssl3t64:amd64 (3.0.13-0ubuntu3.6) ...
+Selecting previously unselected package libpython3.12-minimal:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6621 files and directories currently installed.)
+Preparing to unpack .../libpython3.12-minimal_3.12.3-1ubuntu0.8_amd64.deb ...
+Unpacking libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.8) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../libexpat1_2.6.1-2ubuntu0.3_amd64.deb ...
+Unpacking libexpat1:amd64 (2.6.1-2ubuntu0.3) ...
+Selecting previously unselected package python3.12-minimal.
+Preparing to unpack .../python3.12-minimal_3.12.3-1ubuntu0.8_amd64.deb ...
+Unpacking python3.12-minimal (3.12.3-1ubuntu0.8) ...
+Setting up libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.8) ...
+Setting up libexpat1:amd64 (2.6.1-2ubuntu0.3) ...
+Setting up python3.12-minimal (3.12.3-1ubuntu0.8) ...
+Selecting previously unselected package python3-minimal.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6940 files and directories currently installed.)
+Preparing to unpack .../0-python3-minimal_3.12.3-0ubuntu2_amd64.deb ...
+Unpacking python3-minimal (3.12.3-0ubuntu2) ...
+Selecting previously unselected package media-types.
+Preparing to unpack .../1-media-types_10.1.0_all.deb ...
+Unpacking media-types (10.1.0) ...
+Selecting previously unselected package tzdata.
+Preparing to unpack .../2-tzdata_2025b-0ubuntu0.24.04.1_all.deb ...
+Unpacking tzdata (2025b-0ubuntu0.24.04.1) ...
+Selecting previously unselected package readline-common.
+Preparing to unpack .../3-readline-common_8.2-4build1_all.deb ...
+Unpacking readline-common (8.2-4build1) ...
+Selecting previously unselected package libreadline8t64:amd64.
+Preparing to unpack .../4-libreadline8t64_8.2-4build1_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libhistory.so.8 to /lib/x86_64-linux-gnu/libhistory.so.8.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libhistory.so.8.2 to /lib/x86_64-linux-gnu/libhistory.so.8.2.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libreadline.so.8 to /lib/x86_64-linux-gnu/libreadline.so.8.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libreadline.so.8.2 to /lib/x86_64-linux-gnu/libreadline.so.8.2.usr-is-merged by libreadline8t64'
+Unpacking libreadline8t64:amd64 (8.2-4build1) ...
+Selecting previously unselected package libsqlite3-0:amd64.
+Preparing to unpack .../5-libsqlite3-0_3.45.1-1ubuntu2.5_amd64.deb ...
+Unpacking libsqlite3-0:amd64 (3.45.1-1ubuntu2.5) ...
+Selecting previously unselected package libpython3.12-stdlib:amd64.
+Preparing to unpack .../6-libpython3.12-stdlib_3.12.3-1ubuntu0.8_amd64.deb ...
+Unpacking libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.8) ...
+Selecting previously unselected package python3.12.
+Preparing to unpack .../7-python3.12_3.12.3-1ubuntu0.8_amd64.deb ...
+Unpacking python3.12 (3.12.3-1ubuntu0.8) ...
+Selecting previously unselected package libpython3-stdlib:amd64.
+Preparing to unpack .../8-libpython3-stdlib_3.12.3-0ubuntu2_amd64.deb ...
+Unpacking libpython3-stdlib:amd64 (3.12.3-0ubuntu2) ...
+Setting up python3-minimal (3.12.3-0ubuntu2) ...
+Selecting previously unselected package python3.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7939 files and directories currently installed.)
+Preparing to unpack .../python3_3.12.3-0ubuntu2_amd64.deb ...
+Unpacking python3 (3.12.3-0ubuntu2) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_3.0.13-0ubuntu3.6_amd64.deb ...
+Unpacking openssl (3.0.13-0ubuntu3.6) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20240203_all.deb ...
+Unpacking ca-certificates (20240203) ...
+Setting up media-types (10.1.0) ...
+Setting up libsqlite3-0:amd64 (3.45.1-1ubuntu2.5) ...
+Setting up tzdata (2025b-0ubuntu0.24.04.1) ...
+[?1049h[22;0;0t[1;14r(B[m[4l[?7h[H[2J[?1049l[23;0;0t[H[2J[?1h=[?1006;1000h[39;49m[?1h=[12d(B[0;1m[36m[44m[J[H Package configuration[K[2d (0[0;1m[36m[44mq[167b(B[0;1m[36m[44m[K[3d (0[0;1m[37m[47mlq[70b(B[0;1m[34m[47mConfiguring tzdata(0[0;1m[37m[47mq[73b(0[0m[30m[47mk(B[0;1m[36m[44m[K[4d (0[0;1m[37m[47mx(B[0m[30m[47m[163X[166G(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[5d (0[0;1m[37m[47mx(B[0m[30m[47m[163X[166G(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[6d (0[0;1m[37m[47mx(B[0m[30m[47m[163X[166G(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[7d (0[0;1m[37m[47mx(B[0m[30m[47m[163X[166G(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[8d (0[0;1m[37m[47mtq[162b(0[0m[30m[47mu(B[0;1m[30m[40m  [36m[44m[K[9d (0[0;1m[37m[47mx(B[0m[30m[47m[77X[9;80H(B[0;1m[37m[44m<[33m[44m  [37m[44mO[33m[44mK  [37m[44m>(B[0m[30m[47m[78X[166G(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[10d (0[0;1m[37m[47mm(0[0m[30m[47mq[162bj(B[0;1m[30m[40m  [36m[44m[K[11d   [30m[40m[165X[169G[36m[44m[K[9;83H[39;49m(B[m[4;4H[30m[47mPlease select the geographic area in which you live. Subsequent configuration questions will narrow this down by presenting a list of cities, representing the[5;4Htime zones in which they are located.[9;83H[39;49m(B[m[11;168H[?1006;1000l[14;1H[?1049l[23;0;0t[?1l>[?1049h[22;0;0t[1;14r(B[m[4l[?7h[H[2J[?1049l[23;0;0t[H[2J[?1h=[?1006;1000h[39;49m[?1h=[?1h=[13d(B[0;1m[36m[44m[J[H Package configuration[K[2d (0[0;1m[36m[44mq[67b[37m[47mlqqq(B[0;1m[34m[47mConfiguring tzdata(0[0;1m[37m[47mqqqqqq(0[0m[30m[47mk(0[0;1m[36m[44mq[70b(B[0;1m[36m[44m[K[3;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m Geographic area: [9b(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[4;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mlqqqq(B[0;1m[32m[47m^(-)(0[0m[30m[47mq[14b(0[0;1m[37m[47mk(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[5;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0m[30m[47m     [31m[47mA(B[0;1m[34m[47mntarctica(B[0m[30m[47m [7b(0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[6;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0m[30m[47m     [31m[47mA(B[0;1m[34m[47mrctic(B[0m[30m[47m [11b(0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[7;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0m[30m[47m     (B[0;1m[31m[44mA[33m[44msia(B[0m[30m[47m[14X[7;96H(0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[8;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mm(0[0;1m[37m[47mqqqq(B[0;1m[32m[47mv(+)(0[0;1m[37m[47mq[6b(B[0;1m[34m[47m41%(0[0;1m[37m[47mqqqqqj(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[9;69H[1K (0[0;1m[37m[47mtq[26b(0[0m[30m[47mu(B[0;1m[30m[40m  [36m[44m[K[10;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m[27X[10;98H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[11;69H[1K (0[0;1m[37m[47mm(0[0m[30m[47mq[26bj(B[0;1m[30m[40m  [36m[44m[K[12;71H[1K [30m[40m[29X[12;101H[36m[44m[K[8;91H[39;49m(B[m[10;74H(B[0;1m[37m[44m<[33m[44m  OK  [37m[44m>(B[0m[30m[47m  <(B[0;1m[30m[47mCancel(B[0m[30m[47m>[10;77H[39;49m(B[m[12;100H[?1006;1000l[14;1H[?1049l[23;0;0t[?1l>[?1049h[22;0;0t[1;14r(B[m[4l[?7h[H[2J[?1049l[23;0;0t[H[2J[?1h=[?1006;1000h[39;49m[?1h=[12d(B[0;1m[36m[44m[J[H Package configuration[K[2d (0[0;1m[36m[44mq[167b(B[0;1m[36m[44m[K[3d[K[4;48H[1K (0[0;1m[37m[47mlq[24b(B[0;1m[34m[47mConfiguring tzdata(0[0;1m[37m[47mq[26b(0[0m[30m[47mk(B[0;1m[36m[44m[K[5;48H[1K (0[0;1m[37m[47mx(B[0m[30m[47m[70X[5;120H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[6;48H[1K (0[0;1m[37m[47mx(B[0m[30m[47m[70X[6;120H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[7;48H[1K (0[0;1m[37m[47mx(B[0m[30m[47m[70X[7;120H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[8;48H[1K (0[0;1m[37m[47mtq[69b(0[0m[30m[47mu(B[0;1m[30m[40m  [36m[44m[K[9;48H[1K (0[0;1m[37m[47mx(B[0m[30m[47m[31X[9;81H(B[0;1m[37m[44m<[33m[44m  [37m[44mO[33m[44mK  [37m[44m>(B[0m[30m[47m[31X[9;120H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[10;48H[1K (0[0;1m[37m[47mm(0[0m[30m[47mq[69bj(B[0;1m[30m[40m  [36m[44m[K[11;50H[1K [30m[40m[72X[11;123H[36m[44m[K[9;84H[39;49m(B[m[5;51H[30m[47mPlease select the city or region corresponding to your time zone.[9;84H[39;49m(B[m[11;122H[?1006;1000l[14;1H[?1049l[23;0;0t[?1l>[?1049h[22;0;0t[1;14r(B[m[4l[?7h[H[2J[?1049l[23;0;0t[H[2J[?1h=[?1006;1000h[39;49m[?1h=[?1h=[13d(B[0;1m[36m[44m[J[H Package configuration[K[2d (0[0;1m[36m[44mq[67b[37m[47mlqqq(B[0;1m[34m[47mConfiguring tzdata(0[0;1m[37m[47mqqqqqq(0[0m[30m[47mk(0[0;1m[36m[44mq[70b(B[0;1m[36m[44m[K[3;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m Time zone:[16X[3;98H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[4;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mlqqqq(B[0;1m[32m[47m^(-)(0[0m[30m[47mq[14b(0[0;1m[37m[47mk(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[5;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0m[30m[47m    [31m[47mH(B[0;1m[34m[47marbin(B[0m[30m[47m [12b(0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[6;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0m[30m[47m    [31m[47mH(B[0;1m[34m[47mebron(B[0m[30m[47m [12b(0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[7;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0m[30m[47m    (B[0;1m[31m[44mH[33m[44mo_Chi_Minh(B[0m[30m[47m [7b(0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[8;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m (0[0m[30m[47mm(0[0;1m[37m[47mqqqq(B[0;1m[32m[47mv(+)(0[0;1m[37m[47mq[6b(B[0;1m[34m[47m34%(0[0;1m[37m[47mqqqqqj(B[0m[30m[47m (0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[9;69H[1K (0[0;1m[37m[47mtq[26b(0[0m[30m[47mu(B[0;1m[30m[40m  [36m[44m[K[10;69H[1K (0[0;1m[37m[47mx(B[0m[30m[47m[27X[10;98H(0[0m[30m[47mx(B[0;1m[30m[40m  [36m[44m[K[11;69H[1K (0[0;1m[37m[47mm(0[0m[30m[47mq[26bj(B[0;1m[30m[40m  [36m[44m[K[12;71H[1K [30m[40m[29X[12;101H[36m[44m[K[8;91H[39;49m(B[m[10;74H(B[0;1m[37m[44m<[33m[44m  OK  [37m[44m>(B[0m[30m[47m  <(B[0;1m[30m[47mCancel(B[0m[30m[47m>[10;77H[39;49m(B[m[12;100H[?1006;1000l[14;1H[?1049l[23;0;0t[?1l>
+Current default time zone: 'Asia/Ho_Chi_Minh'
+Local time is now:      Tue Oct 21 09:04:03 +07 2025.
+Universal Time is now:  Tue Oct 21 02:04:03 UTC 2025.
+Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+Setting up openssl (3.0.13-0ubuntu3.6) ...
+Setting up readline-common (8.2-4build1) ...
+Setting up ca-certificates (20240203) ...
+Updating certificates in /etc/ssl/certs...
+146 added, 0 removed; done.
+Setting up libreadline8t64:amd64 (8.2-4build1) ...
+Setting up libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.8) ...
+Setting up python3.12 (3.12.3-1ubuntu0.8) ...
+Setting up libpython3-stdlib:amd64 (3.12.3-0ubuntu2) ...
+Setting up python3 (3.12.3-0ubuntu2) ...
+running python rtupdate hooks for python3.12...
+running python post-rtupdate hooks for python3.12...
+Processing triggers for libc-bin (2.39-0ubuntu8.5) ...
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libmount.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libtasn1.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libapt-pkg.so.6.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libext2fs.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libmenuw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libz.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/liblz4.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libe2p.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgpg-error.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libtinfo.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpcre2-8.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpamc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpsx.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcap.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpanelw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgcrypt.so.20 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libuuid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpam.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libseccomp.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libtic.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libudev.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libformw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libp11-kit.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libaudit.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libstdc++.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libnettle.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/liblzma.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpam_misc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcrypt.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libsmartcols.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgmp.so.10 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libacl.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libblkid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcap-ng.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libassuan.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libnpth.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libsystemd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libxxhash.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libhogweed.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libdebconfclient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libdrop_ambient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libffi.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libzstd.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libattr.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgnutls.so.30 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libncursesw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libapt-private.so.0.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libunistring.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libmd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libss.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libbz2.so.1.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libidn2.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcom_err.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libproc2.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libmount.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libtasn1.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libapt-pkg.so.6.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libext2fs.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libmenuw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libz.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/liblz4.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libe2p.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgpg-error.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libtinfo.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpamc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpsx.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcap.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpanelw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgcrypt.so.20 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libuuid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpam.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libseccomp.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libtic.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libudev.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libformw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libp11-kit.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libaudit.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libstdc++.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libnettle.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/liblzma.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpam_misc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcrypt.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libsmartcols.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgmp.so.10 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libacl.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libblkid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcap-ng.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libassuan.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libnpth.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libsystemd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libxxhash.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libhogweed.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libdebconfclient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libdrop_ambient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libffi.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libzstd.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libattr.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgnutls.so.30 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libncursesw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libapt-private.so.0.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libunistring.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libmd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libss.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libbz2.so.1.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libidn2.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcom_err.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libproc2.so.0 is not a symbolic link
+
+Processing triggers for ca-certificates (20240203) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Log ended: 2025-10-21  02:04:17

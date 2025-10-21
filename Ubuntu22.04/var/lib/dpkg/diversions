@@ -1,3 +1,9 @@
+/lib/x86_64-linux-gnu/libhistory.so.8.2
+/lib/x86_64-linux-gnu/libhistory.so.8.2.usr-is-merged
+libreadline8t64
+/lib/x86_64-linux-gnu/libreadline.so.8
+/lib/x86_64-linux-gnu/libreadline.so.8.usr-is-merged
+libreadline8t64
 /lib/x86_64-linux-gnu/libe2p.so.2
 /lib/x86_64-linux-gnu/libe2p.so.2.usr-is-merged
 libext2fs2t64
@@ -16,6 +22,12 @@ libc6
 /lib/x86_64-linux-gnu/libext2fs.so.2
 /lib/x86_64-linux-gnu/libext2fs.so.2.usr-is-merged
 libext2fs2t64
+/lib/x86_64-linux-gnu/libhistory.so.8
+/lib/x86_64-linux-gnu/libhistory.so.8.usr-is-merged
+libreadline8t64
+/lib/x86_64-linux-gnu/libreadline.so.8.2
+/lib/x86_64-linux-gnu/libreadline.so.8.2.usr-is-merged
+libreadline8t64
 /lib64
 /lib64.usr-is-merged
 base-files

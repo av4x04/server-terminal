@@ -162,6 +162,29 @@ Description: basic utilities from 4.4BSD-Lite
 Homepage: https://www.kernel.org/pub/linux/utils/util-linux/
 Original-Maintainer: util-linux packagers <util-linux@packages.debian.org>
 
+Package: ca-certificates
+Status: install ok installed
+Priority: standard
+Section: misc
+Installed-Size: 386
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Multi-Arch: foreign
+Version: 20240203
+Depends: openssl (>= 1.1.1), debconf (>= 0.5) | debconf-2.0
+Breaks: ca-certificates-java (<< 20121112+nmu1)
+Enhances: openssl
+Description: Common CA certificates
+ Contains the certificate authorities shipped with Mozilla's browser to allow
+ SSL-based applications to check for the authenticity of SSL connections.
+ .
+ Please note that Debian can neither confirm nor deny whether the
+ certificate authorities whose certificates are included in this package
+ have in any way been audited for trustworthiness or RFC 3647 compliance.
+ Full responsibility to assess them belongs to the local system
+ administrator.
+Original-Maintainer: Julien Cristau <jcristau@debian.org>
+
 Package: coreutils
 Essential: yes
 Status: install ok installed
@@ -883,6 +906,25 @@ Description: Debian Configuration Management System (C-implementation library)
  This library allows C programs to interface with cdebconf.
 Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 
+Package: libexpat1
+Status: install ok installed
+Priority: optional
+Section: libs
+Installed-Size: 388
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: expat
+Version: 2.6.1-2ubuntu0.3
+Depends: libc6 (>= 2.38)
+Description: XML parsing C library - runtime library
+ This package contains the runtime, shared library of expat, the C
+ library for parsing XML. Expat is a stream-oriented parser in
+ which an application registers handlers for things the parser
+ might find in the XML document (like start tags).
+Homepage: https://libexpat.github.io/
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+
 Package: libext2fs2t64
 Status: install ok installed
 Priority: required
@@ -1506,6 +1548,92 @@ Description: library for accessing process information from /proc
 Homepage: https://gitlab.com/procps-ng/procps
 Original-Maintainer: Craig Small <csmall@debian.org>
 
+Package: libpython3-stdlib
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 27
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: python3-defaults
+Version: 3.12.3-0ubuntu2
+Depends: libpython3.12-stdlib (>= 3.12.3-0~)
+Description: interactive high-level object-oriented language (default python3 version)
+ This package contains the majority of the standard library for the Python
+ language (default python3 version).
+ .
+ This package is a dependency package, which depends on Debian's default
+ Python 3 version's standard library (currently v3.12).
+Homepage: https://www.python.org/
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: libpython3.12-minimal
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 5181
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: python3.12
+Version: 3.12.3-1ubuntu0.8
+Depends: libc6 (>= 2.14), libssl3t64 (>= 3.0.0)
+Recommends: libpython3.12-stdlib
+Conflicts: binfmt-support (<< 1.1.2)
+Conffiles:
+ /etc/python3.12/sitecustomize.py d6b276695157bde06a56ba1b2bc53670
+Description: Minimal subset of the Python language (version 3.12)
+ This package contains some essential modules. It is normally not
+ used on it's own, but as a dependency of python3.12-minimal.
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: libpython3.12-stdlib
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 9023
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: python3.12
+Version: 3.12.3-1ubuntu0.8
+Replaces: libpython3.12-testsuite (<< 3.12.0-3~), python3-gdbm (<< 3.9.9-1~)
+Depends: libpython3.12-minimal (= 3.12.3-1ubuntu0.8), media-types | mime-support, netbase, tzdata, libbz2-1.0, libc6 (>= 2.38), libcrypt1 (>= 1:4.1.0), libdb5.3t64, libffi8 (>= 3.4), liblzma5 (>= 5.1.1alpha+20120614), libncursesw6 (>= 6.1), libreadline8t64 (>= 7.0~beta), libsqlite3-0 (>= 3.36.0), libtinfo6 (>= 6)
+Breaks: libpython3.12-testsuite (<< 3.12.0-3~), python3-gdbm (<< 3.9.9-1~)
+Description: Interactive high-level object-oriented language (standard library, version 3.12)
+ Python is a high-level, interactive, object-oriented language. Its 3.12 version
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package contains Python 3.12's standard library. It is normally not
+ used on its own, but as a dependency of python3.12.
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: libreadline8t64
+Status: install ok installed
+Priority: optional
+Section: libs
+Installed-Size: 467
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: readline
+Version: 8.2-4build1
+Replaces: libreadline8
+Provides: libreadline8 (= 8.2-4build1)
+Depends: readline-common, libc6 (>= 2.38), libtinfo6 (>= 6)
+Breaks: libreadline8 (<< 8.2-4build1)
+Description: GNU readline and history libraries, run-time libraries
+ The GNU readline library aids in the consistency of user interface
+ across discrete programs that need to provide a command line
+ interface.
+ .
+ The GNU history library provides a consistent user interface for
+ recalling lines of previously typed input.
+Homepage: https://tiswww.case.edu/php/chet/readline/rltop.html
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
 Package: libseccomp2
 Status: install ok installed
 Priority: important
@@ -1663,6 +1791,25 @@ Description: smart column output alignment library
 Homepage: https://www.kernel.org/pub/linux/utils/util-linux/
 Original-Maintainer: util-linux packagers <util-linux@packages.debian.org>
 
+Package: libsqlite3-0
+Status: install ok installed
+Priority: optional
+Section: libs
+Installed-Size: 1731
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: sqlite3
+Version: 3.45.1-1ubuntu2.5
+Depends: libc6 (>= 2.38)
+Breaks: crowdsec (<< 1.4), python-migrate (<< 0.11.0-4~), python3-migrate (<< 0.11.0-4~)
+Description: SQLite 3 shared library
+ SQLite is a C library that implements an SQL database engine.
+ Programs that link with the SQLite library can have SQL database
+ access without running a separate RDBMS process.
+Homepage: https://www.sqlite.org/
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+
 Package: libss2
 Status: install ok installed
 Priority: required
@@ -1688,18 +1835,18 @@ Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
 
 Package: libssl3t64
 Status: install ok installed
-Priority: required
+Priority: optional
 Section: libs
 Installed-Size: 6608
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Architecture: amd64
 Multi-Arch: same
 Source: openssl
-Version: 3.0.13-0ubuntu3.5
+Version: 3.0.13-0ubuntu3.6
 Replaces: libssl3
-Provides: libssl3 (= 3.0.13-0ubuntu3.5)
+Provides: libssl3 (= 3.0.13-0ubuntu3.6)
 Depends: libc6 (>= 2.38)
-Breaks: libssl3 (<< 3.0.13-0ubuntu3.5)
+Breaks: libssl3 (<< 3.0.13-0ubuntu3.6)
 Description: Secure Sockets Layer toolkit - shared libraries
  This package is part of the OpenSSL project's implementation of the SSL
  and TLS cryptographic protocols for secure communication over the
@@ -1973,6 +2120,31 @@ Description: Pattern scanning and text processing language
 Homepage: https://invisible-island.net/mawk/
 Original-Maintainer: Boyuan Yang <byang@debian.org>
 
+Package: media-types
+Status: install ok installed
+Priority: standard
+Section: net
+Installed-Size: 93
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Multi-Arch: foreign
+Version: 10.1.0
+Replaces: mime-support (<< 3.65)
+Breaks: mime-support (<< 3.65)
+Conffiles:
+ /etc/mime.types e06b55a5d7cb8e9835e1caad087d1636
+Description: List of standard media types and their usual file extension
+ This package installs the configuration file /etc/mime.types, that lists
+ standard media types (originally known as "MIME" types) and their usual file
+ extension.  This provides a simple way for programs to have a first guess at a
+ file's content.  On standard Debian desktop systems, one will also find more
+ sophisticated tools, for instance provided by the "file" and "xdg-utils"
+ packages.
+ .
+ The /etc/mime.types file is compiled by hand using mostly information provided
+ by the Internet Assigned Numbers Authority (IANA).
+Original-Maintainer: Mime-Support Packagers <team+debian-mimesupport-packagers@tracker.debian.org>
+
 Package: mount
 Status: install ok installed
 Priority: required
@@ -2062,6 +2234,35 @@ Description: Basic TCP/IP networking system
  In particular, it supplies common name-to-number mappings in /etc/services,
  /etc/rpc, /etc/protocols and /etc/ethertypes.
 Original-Maintainer: Marco d'Itri <md@linux.it>
+
+Package: openssl
+Status: install ok installed
+Priority: optional
+Section: utils
+Installed-Size: 1885
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: foreign
+Version: 3.0.13-0ubuntu3.6
+Depends: libc6 (>= 2.34), libssl3t64 (>= 3.0.9)
+Suggests: ca-certificates
+Conffiles:
+ /etc/ssl/openssl.cnf 953fe829df1b6f2b1b39c7742ab6d0b8
+Description: Secure Sockets Layer toolkit - cryptographic utility
+ This package is part of the OpenSSL project's implementation of the SSL
+ and TLS cryptographic protocols for secure communication over the
+ Internet.
+ .
+ It contains the general-purpose command line binary /usr/bin/openssl,
+ useful for cryptographic operations such as:
+  * creating RSA, DH, and DSA key parameters;
+  * creating X.509 certificates, CSRs, and CRLs;
+  * calculating message digests;
+  * encrypting and decrypting with ciphers;
+  * testing SSL/TLS clients and servers;
+  * handling S/MIME signed or encrypted mail.
+Homepage: https://www.openssl.org/
+Original-Maintainer: Debian OpenSSL Team <pkg-openssl-devel@alioth-lists.debian.net>
 
 Package: passwd
 Status: install ok installed
@@ -2216,6 +2417,118 @@ Description: /proc file system utilities
 Homepage: https://gitlab.com/procps-ng/procps
 Original-Maintainer: Craig Small <csmall@debian.org>
 
+Package: python3
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 81
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: allowed
+Source: python3-defaults
+Version: 3.12.3-0ubuntu2
+Replaces: python3-minimal (<< 3.1.2-2)
+Provides: python3-profiler, python3-supported-max (= 3.12), python3-supported-min (= 3.12)
+Depends: python3.12 (>= 3.12.3-0~), libpython3-stdlib (= 3.12.3-0ubuntu2)
+Pre-Depends: python3-minimal (= 3.12.3-0ubuntu2)
+Suggests: python3-doc (>= 3.12.3-0ubuntu2), python3-tk (>= 3.12.3-0~), python3-venv (>= 3.12.3-0ubuntu2)
+Conflicts: python3-distutils
+Description: interactive high-level object-oriented language (default python3 version)
+ Python, the high-level, interactive object oriented language,
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package is a dependency package, which depends on Debian's default
+ Python 3 version (currently v3.12).
+Homepage: https://www.python.org/
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: python3-minimal
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 111
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: allowed
+Source: python3-defaults
+Version: 3.12.3-0ubuntu2
+Depends: dpkg (>= 1.13.20)
+Pre-Depends: python3.12-minimal (>= 3.12.3-0~)
+Description: minimal subset of the Python language (default python3 version)
+ This package contains the interpreter and some essential modules.  It's used
+ in the boot process for some basic tasks.
+ See /usr/share/doc/python3.12-minimal/README.Debian for a list of the modules
+ contained in this package.
+Homepage: https://www.python.org/
+Cnf-Visible-Pkgname: python3
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: python3.12
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 737
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: allowed
+Version: 3.12.3-1ubuntu0.8
+Depends: python3.12-minimal (= 3.12.3-1ubuntu0.8), libpython3.12-stdlib (= 3.12.3-1ubuntu0.8), media-types | mime-support, tzdata
+Recommends: ca-certificates
+Suggests: python3.12-venv, python3.12-doc, binutils
+Breaks: python3-all (<< 3.6.5~rc1-1), python3-dev (<< 3.6.5~rc1-1), python3-venv (<< 3.6.5-2)
+Description: Interactive high-level object-oriented language (version 3.12)
+ Python is a high-level, interactive, object-oriented language. Its 3.12 version
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: python3.12-minimal
+Status: install ok installed
+Priority: optional
+Section: python
+Installed-Size: 7927
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: allowed
+Source: python3.12
+Version: 3.12.3-1ubuntu0.8
+Depends: libpython3.12-minimal (= 3.12.3-1ubuntu0.8), libexpat1 (>= 2.6.0), zlib1g (>= 1:1.2.0)
+Pre-Depends: libc6 (>= 2.38)
+Recommends: python3.12
+Suggests: binfmt-support
+Conflicts: binfmt-support (<< 1.1.2)
+Description: Minimal subset of the Python language (version 3.12)
+ This package contains the interpreter and some essential modules.  It can
+ be used in the boot process for some basic tasks.
+ See /usr/share/doc/python3.12-minimal/README.Debian for a list of the modules
+ contained in this package.
+Cnf-Visible-Pkgname: python3.12
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
+Package: readline-common
+Status: install ok installed
+Priority: optional
+Section: utils
+Installed-Size: 77
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Multi-Arch: foreign
+Source: readline
+Version: 8.2-4build1
+Replaces: libreadline-common, libreadline4 (<< 4.3-16), libreadline5 (<< 5.0-11)
+Suggests: readline-doc
+Conflicts: libreadline-common, libreadline5 (<< 5.0-11)
+Description: GNU readline and history libraries, common files
+ The GNU readline library aids in the consistency of user interface
+ across discrete programs that need to provide a command line
+ interface.
+ .
+ The GNU history library provides a consistent user interface for
+ recalling lines of previously typed input.
+Homepage: https://tiswww.case.edu/php/chet/readline/rltop.html
+Original-Maintainer: Matthias Klose <doko@debian.org>
+
 Package: sed
 Essential: yes
 Status: install ok installed
@@ -2302,6 +2615,28 @@ Description: GNU version of the tar archiving utility
  sets of files with others.
 Homepage: https://www.gnu.org/software/tar/
 Original-Maintainer: Janos Lenart <ocsi@debian.org>
+
+Package: tzdata
+Status: install ok installed
+Priority: required
+Section: localization
+Installed-Size: 1387
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Multi-Arch: foreign
+Version: 2025b-0ubuntu0.24.04.1
+Replaces: tzdata-legacy (= 2023c-8ubuntu1)
+Provides: tzdata-trixie
+Depends: debconf (>= 0.5) | debconf-2.0
+Breaks: tzdata-legacy (= 2023c-8ubuntu1)
+Description: time zone and daylight-saving time data
+ This package contains data required for the implementation of
+ standard local time for many representative locations around the
+ globe. It is updated periodically to reflect changes made by
+ political bodies to time zone boundaries, UTC offsets, and
+ daylight-saving rules.
+Homepage: https://www.iana.org/time-zones
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
 
 Package: ubuntu-keyring
 Status: install ok installed

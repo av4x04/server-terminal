@@ -476,3 +476,9 @@ Commandline: apt install libc6
 Upgrade: libc6:amd64 (2.39-0ubuntu8.5, 2.39-0ubuntu8.6), libc-bin:amd64 (2.39-0ubuntu8.5, 2.39-0ubuntu8.6)
 Error: Sub-process /usr/bin/dpkg returned an error code (1)
 End-Date: 2025-10-21  02:01:17
+
+Start-Date: 2025-10-21  02:03:49
+Commandline: apt install python3
+Install: python3.12:amd64 (3.12.3-1ubuntu0.8, automatic), readline-common:amd64 (8.2-4build1, automatic), tzdata:amd64 (2025b-0ubuntu0.24.04.1, automatic), python3-minimal:amd64 (3.12.3-0ubuntu2, automatic), libexpat1:amd64 (2.6.1-2ubuntu0.3, automatic), libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.8, automatic), libreadline8t64:amd64 (8.2-4build1, automatic), python3:amd64 (3.12.3-0ubuntu2), media-types:amd64 (10.1.0, automatic), libsqlite3-0:amd64 (3.45.1-1ubuntu2.5, automatic), ca-certificates:amd64 (20240203, automatic), libpython3-stdlib:amd64 (3.12.3-0ubuntu2, automatic), python3.12-minimal:amd64 (3.12.3-1ubuntu0.8, automatic), libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.8, automatic), openssl:amd64 (3.0.13-0ubuntu3.6, automatic)
+Upgrade: libssl3t64:amd64 (3.0.13-0ubuntu3.5, 3.0.13-0ubuntu3.6)
+End-Date: 2025-10-21  02:04:17
