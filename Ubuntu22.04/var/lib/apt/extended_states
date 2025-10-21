@@ -1,0 +1,20 @@
+Package: libdb5.3t64
+Architecture: amd64
+Auto-Installed: 1
+
+Package: netbase
+Architecture: amd64
+Auto-Installed: 1
+
+Package: libgdbm-compat4t64
+Architecture: amd64
+Auto-Installed: 1
+
+Package: libgdbm6t64
+Architecture: amd64
+Auto-Installed: 1
+
+Package: libperl5.38t64
+Architecture: amd64
+Auto-Installed: 1
+

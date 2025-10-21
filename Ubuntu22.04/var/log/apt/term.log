@@ -1,0 +1,291 @@
+
+Log started: 2025-10-21  01:59:39
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4375 files and directories currently installed.)
+Preparing to unpack .../coreutils_9.4-3ubuntu6.1_amd64.deb ...
+Unpacking coreutils (9.4-3ubuntu6.1) over (9.4-3ubuntu6) ...
+Setting up coreutils (9.4-3ubuntu6.1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4375 files and directories currently installed.)
+Preparing to unpack .../dpkg_1.22.6ubuntu6.5_amd64.deb ...
+Unpacking dpkg (1.22.6ubuntu6.5) over (1.22.6ubuntu6.1) ...
+Setting up dpkg (1.22.6ubuntu6.5) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4375 files and directories currently installed.)
+Preparing to unpack .../libc6_2.39-0ubuntu8.6_amd64.deb ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 79.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+debconf: falling back to frontend: Teletype
+[1mdpkg-divert:[0m [1;31merror:[0m cannot divert directories
+
+Use --help for help about diverting files.
+[1mdpkg:[0m error processing archive /var/cache/apt/archives/libc6_2.39-0ubuntu8.6_amd64.deb (--unpack):
+ new libc6:amd64 package pre-installation script subprocess returned error exit status 2
+Errors were encountered while processing:
+ /var/cache/apt/archives/libc6_2.39-0ubuntu8.6_amd64.deb
+Log ended: 2025-10-21  01:59:42
+
+Log started: 2025-10-21  02:00:44
+Selecting previously unselected package perl-modules-5.38.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4375 files and directories currently installed.)
+Preparing to unpack .../0-perl-modules-5.38_5.38.2-3.2ubuntu0.2_all.deb ...
+Unpacking perl-modules-5.38 (5.38.2-3.2ubuntu0.2) ...
+Selecting previously unselected package libgdbm6t64:amd64.
+Preparing to unpack .../1-libgdbm6t64_1.23-5.1build1_amd64.deb ...
+Unpacking libgdbm6t64:amd64 (1.23-5.1build1) ...
+Selecting previously unselected package libgdbm-compat4t64:amd64.
+Preparing to unpack .../2-libgdbm-compat4t64_1.23-5.1build1_amd64.deb ...
+Unpacking libgdbm-compat4t64:amd64 (1.23-5.1build1) ...
+Selecting previously unselected package libperl5.38t64:amd64.
+Preparing to unpack .../3-libperl5.38t64_5.38.2-3.2ubuntu0.2_amd64.deb ...
+Unpacking libperl5.38t64:amd64 (5.38.2-3.2ubuntu0.2) ...
+Selecting previously unselected package perl.
+Preparing to unpack .../4-perl_5.38.2-3.2ubuntu0.2_amd64.deb ...
+Unpacking perl (5.38.2-3.2ubuntu0.2) ...
+Selecting previously unselected package apt-utils.
+Preparing to unpack .../5-apt-utils_2.8.3_amd64.deb ...
+Unpacking apt-utils (2.8.3) ...
+Selecting previously unselected package netbase.
+Preparing to unpack .../6-netbase_6.4_all.deb ...
+Unpacking netbase (6.4) ...
+Selecting previously unselected package dialog.
+Preparing to unpack .../7-dialog_1.3-20240101-1_amd64.deb ...
+Unpacking dialog (1.3-20240101-1) ...
+Setting up apt-utils (2.8.3) ...
+Setting up libgdbm6t64:amd64 (1.23-5.1build1) ...
+Setting up libgdbm-compat4t64:amd64 (1.23-5.1build1) ...
+Setting up dialog (1.3-20240101-1) ...
+Setting up perl-modules-5.38 (5.38.2-3.2ubuntu0.2) ...
+Setting up netbase (6.4) ...
+Setting up libperl5.38t64:amd64 (5.38.2-3.2ubuntu0.2) ...
+Setting up perl (5.38.2-3.2ubuntu0.2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.5) ...
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libmount.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libtasn1.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libapt-pkg.so.6.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libext2fs.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libmenuw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libz.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/liblz4.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libe2p.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgpg-error.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libtinfo.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpcre2-8.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpamc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpsx.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcap.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpanelw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgcrypt.so.20 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libuuid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpam.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libseccomp.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libtic.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libudev.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libformw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libp11-kit.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libaudit.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libstdc++.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libnettle.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/liblzma.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libpam_misc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcrypt.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libsmartcols.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgmp.so.10 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libacl.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libblkid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcap-ng.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libassuan.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libnpth.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libsystemd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libxxhash.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libhogweed.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libdebconfclient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libdrop_ambient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libffi.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libzstd.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libattr.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libgnutls.so.30 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libncursesw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libapt-private.so.0.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libunistring.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libmd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libss.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libbz2.so.1.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libidn2.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libcom_err.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /lib/x86_64-linux-gnu/libproc2.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libmount.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libtasn1.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libapt-pkg.so.6.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libext2fs.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libmenuw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libz.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/liblz4.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libe2p.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgpg-error.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libtinfo.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpamc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpsx.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcap.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpanelw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgcrypt.so.20 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libuuid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpam.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libseccomp.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libtic.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libudev.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libformw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libp11-kit.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libaudit.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libstdc++.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libnettle.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/liblzma.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libpam_misc.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcrypt.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libsmartcols.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgmp.so.10 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libacl.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libblkid.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcap-ng.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libassuan.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libnpth.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libsystemd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libxxhash.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libhogweed.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libdebconfclient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libdrop_ambient.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libffi.so.8 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libzstd.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libattr.so.1 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libgnutls.so.30 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libncursesw.so.6 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libapt-private.so.0.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libunistring.so.5 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libmd.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libss.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libbz2.so.1.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libidn2.so.0 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libcom_err.so.2 is not a symbolic link
+
+/sbin/ldconfig.real: /usr/lib/x86_64-linux-gnu/libproc2.so.0 is not a symbolic link
+
+Log ended: 2025-10-21  02:00:54
+
+Log started: 2025-10-21  02:01:17
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6621 files and directories currently installed.)
+Preparing to unpack .../libc6_2.39-0ubuntu8.6_amd64.deb ...
+[1mdpkg-divert:[0m [1;31merror:[0m cannot divert directories
+
+Use --help for help about diverting files.
+[1mdpkg:[0m error processing archive /var/cache/apt/archives/libc6_2.39-0ubuntu8.6_amd64.deb (--unpack):
+ new libc6:amd64 package pre-installation script subprocess returned error exit status 2
+Errors were encountered while processing:
+ /var/cache/apt/archives/libc6_2.39-0ubuntu8.6_amd64.deb
+Log ended: 2025-10-21  02:01:17
