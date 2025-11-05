@@ -3,16 +3,8 @@
 # ============================================================
 
 # --- Color Prompt ---
-RED='
-
-\[\e[0;31m\]
-
-'
-RESET='
-
-\[\e[0m\]
-
-'
+RED='\[\e[0;31m\]'
+RESET='\[\e[0m\]'
 export PS1="${RED}admin@client${RESET}:~# "
 
 # --- Restrict Exit (Ctrl+D) ---
@@ -96,11 +88,13 @@ readonly BASH_ENV 2>/dev/null
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # ============================================================
-# Banner (Simple Welcome Message)
+# Banner (Kali Dragon ASCII Art - Static)
 # ============================================================
 
 show_banner() {
-    echo "Welcome to admin@client shell"
+cat <<'ASCIIART'
+
+ASCIIART
 }
 
 # --- Show Banner Only in Interactive Shells ---
