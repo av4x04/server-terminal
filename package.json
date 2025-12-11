@@ -1,20 +1,34 @@
 {
-  "name": "ser",
-  "version": "1.0.0",
-  "description": "Web terminal on Render",
+  "name": "linux-web-os",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Linux Web OS - web terminal with file upload and Puppeteer integration",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2",
-    "socket.io": "^4.7.5",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
     "node-pty": "^1.0.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "puppeteer": "^24.15.0",
+    "multer": "^2.0.0"
   },
+  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "keywords": [
+    "linux",
+    "web",
+    "terminal",
+    "express",
+    "socket.io",
+    "puppeteer",
+    "multer"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
 }
