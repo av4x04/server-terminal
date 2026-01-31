@@ -13,13 +13,14 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const server = createServer(app);
+server.setMaxListeners(0); // Fix MaxListenersExceededWarning
 const PORT = process.env.PORT || 3000;
 
 // --- 1. ROBUST PROXY LOGIC (Single Instance - High Performance) ---
 // Docs: https://github.com/chimurai/http-proxy-middleware#router-function
 
 const dynamicProxy = createProxyMiddleware({
-    target: 'http://localhost:8080', // Fallback default (wont be used often due to router)
+    target: 'http://127.0.0.1:8080', // Fix: Use IPv4 explicitly
     changeOrigin: true,
     ws: true, // Enable WebSocket support
     router: (req) => {
@@ -29,7 +30,7 @@ const dynamicProxy = createProxyMiddleware({
             const port = parseInt(match[1]);
             // Security check: Don't allow proxying to the main server port itself
             if (port === PORT) return null;
-            return `http://localhost:${port}`;
+            return `http://127.0.0.1:${port}`; // Fix: Use IPv4 explicitly
         }
         return null;
     },
