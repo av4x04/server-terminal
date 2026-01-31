@@ -13,63 +13,50 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const server = createServer(app);
-server.setMaxListeners(0); // Fix MaxListenersExceededWarning
+server.setMaxListeners(0); // Fix: Prevent memory leak warnings
+
 const PORT = process.env.PORT || 3000;
 
-// --- 1. ROBUST PROXY LOGIC (Single Instance - High Performance) ---
-// Docs: https://github.com/chimurai/http-proxy-middleware#router-function
+// --- 1. PROXY LOGIC (RESTORED V1 STYLE + IMPROVED STABILITY) ---
+// Route: /p/3000/some/path -> Proxy to http://127.0.0.1:3000/some/path
 
-const dynamicProxy = createProxyMiddleware({
-    target: 'http://127.0.0.1:8080', // Fix: Use IPv4 explicitly
-    changeOrigin: true,
-    ws: true, // Enable WebSocket support
-    router: (req) => {
-        // Extract port from url: /p/3000/foo -> match[1] = 3000
-        const match = req.url.match(/^\/p\/(\d+)/);
-        if (match) {
-            const port = parseInt(match[1]);
-            // Security check: Don't allow proxying to the main server port itself
-            if (port === PORT) return null;
-            return `http://127.0.0.1:${port}`; // Fix: Use IPv4 explicitly
-        }
-        return null;
-    },
-    pathRewrite: (path, req) => {
-        // Remove /p/3000 from the path so the target app receives /foo
-        // /p/3000/foo -> /foo
-        return path.replace(/^\/p\/\d+/, '') || '/';
-    },
-    logger: console,
-    on: {
-        error: (err, req, res) => {
-            // CRITICAL FIX: Handle WebSocket errors distinct from HTTP errors
-            // to prevent "res.writeHead is not a function" crash.
-            
-            const isWebSocket = req.upgrade || (res && !res.writeHead); 
-            
-            if (isWebSocket) {
-                console.log(`[Proxy-WS] Error on ${req.url}: Client disconnected or target offline.`);
-                // Just destroy the socket, don't try to send HTTP response
-                if (req.socket) req.socket.destroy();
-                return;
-            }
-
-            // Standard HTTP Error Handling
-            console.error(`[Proxy-HTTP] Error on ${req.url}:`, err.message);
-            if (res && !res.headersSent) {
-                res.writeHead(502, { 'Content-Type': 'text/plain' });
-                res.end(`Proxy Error: Target service is not running or unreachable.\nDetails: ${err.message}`);
-            }
-        },
-        proxyReq: (proxyReq, req, res) => {
-            // Optional: Fix for some apps that require strict host headers
-            // proxyReq.setHeader('X-Forwarded-Prefix', req.baseUrl);
-        }
+app.use('/p/:port', (req, res, next) => {
+    const port = parseInt(req.params.port);
+    
+    // Security check
+    if (isNaN(port) || port < 1 || port > 65535 || port === PORT) {
+        return res.status(400).send('Invalid or restricted port.');
     }
-});
 
-// Mount the single proxy instance at /p
-app.use('/p', dynamicProxy);
+    // Create a fresh proxy instance for this specific port request
+    // This matches the "V1" behavior you liked, which handles dynamic ports reliably.
+    const proxy = createProxyMiddleware({
+        target: `http://127.0.0.1:${port}`, // Fix: Force IPv4
+        changeOrigin: true,
+        ws: true, // Enable WebSockets
+        pathRewrite: {
+            [`^/p/${port}`]: '', // Strip the prefix so app receives clean path
+        },
+        // Error Handling to prevent crashes
+        on: {
+            error: (err, req, res) => {
+                const isWebSocket = req.upgrade || (res && !res.writeHead);
+                if (isWebSocket) {
+                    if (req.socket) req.socket.destroy();
+                    return; // Silent fail for WS to prevent app crash
+                }
+                
+                // Only send error if headers haven't been sent
+                if (res && !res.headersSent) {
+                    res.writeHead(502, { 'Content-Type': 'text/plain' });
+                    res.end(`Proxy Error: Could not reach port ${port}. Ensure your service is running.\nDetails: ${err.message}`);
+                }
+            }
+        }
+    });
+
+    proxy(req, res, next);
+});
 
 
 // --- 2. TERMINAL SERVER LOGIC ---
@@ -128,7 +115,7 @@ class RingBuffer {
 }
 
 const sessions = new Map();
-const HISTORY_LIMIT = 1024 * 512; // 512KB
+const HISTORY_LIMIT = 1024 * 512;
 
 function getNextSessionNumber() {
     const usedNumbers = Array.from(sessions.values())
@@ -188,7 +175,6 @@ function createSession(isInitial = false) {
   });
 
   sessions.set(id, session);
-  console.log(`Created session ${session.name} (${session.id})`);
   io.emit('session-created', { id: session.id, name: session.name });
 
   return session;
@@ -215,8 +201,6 @@ function createBucket(capacity = 32768, refillRate = 16384) {
 }
 
 io.on('connection', (socket) => {
-  // console.log('Client connected', socket.id); // Reduced verbosity
-
   const sessionList = Array.from(sessions.values()).map(s => ({ id: s.id, name: s.name }));
   socket.emit('sessions-list', sessionList);
 
@@ -264,15 +248,12 @@ io.on('connection', (socket) => {
   socket.on('resize', ({ sessionId, cols, rows }) => {
     const session = sessions.get(sessionId);
     if (!session) return;
-    cols = Number(cols) || 80;
-    rows = Number(rows) || 30;
-    try { session.pty.resize(cols, rows); } catch (e) {}
+    try { session.pty.resize(Number(cols), Number(rows)); } catch (e) {}
   });
 });
 
-// Graceful Shutdown
 function shutdown() {
-  console.log('Server shutting down...');
+  console.log('Shutdown');
   sessions.forEach(session => {
     try { if (session.pty) session.pty.kill(); } catch (e) {}
   });
