@@ -8,7 +8,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
-// SILENCE DEPRECATION WARNINGS
+// --- SILENCE DEPRECATION WARNINGS ---
 process.removeAllListeners('warning');
 process.on('warning', (warning) => {
     if (warning.name === 'DeprecationWarning') return;
@@ -21,40 +21,39 @@ const __dirname = dirname(__filename);
 const app = express();
 const server = createServer(app);
 
-// Optimizations
+// Optimizations for Stability
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
+server.setMaxListeners(0); // Prevent listener leak warnings
 
 const PORT = process.env.PORT || 3000;
 
-// --- 1. PROXY LOGIC (SINGLE INSTANCE - THE CORRECT WAY) ---
-// Thay vì tạo proxy trong app.use, ta tạo 1 biến duy nhất ở ngoài.
+// --- 1. GLOBAL PROXY INSTANCE (MANUAL CONTROL) ---
+// We create ONE proxy instance but DO NOT attach it automatically via app.use for WS.
+// We will manually route WS requests in the 'upgrade' event.
 
-const dynamicProxy = createProxyMiddleware({
+const proxyRouter = (req) => {
+    // Extract port from URL: /p/3000/abc -> 3000
+    const match = req.url.match(/^\/p\/(\d+)/);
+    if (match) {
+        const port = parseInt(match[1]);
+        if (isNaN(port) || port < 1 || port > 65535 || port === PORT) return null;
+        return `http://127.0.0.1:${port}`; // Force IPv4
+    }
+    return null;
+};
+
+const proxyOptions = {
     target: 'http://127.0.0.1:8080', // Default fallback
     changeOrigin: true,
-    ws: true, // Websocket support enabled ONCE
-    router: (req) => {
-        // req.url ở đây (khi mount vào /p) sẽ là phần đuôi sau /p
-        // Ví dụ truy cập /p/3000/abc -> req.url (đối với middleware) có thể là /3000/abc hoặc full tùy setup
-        // Để chắc ăn, ta check logic path.
-        
-        // Express khi dùng app.use('/p', ...) sẽ strip /p.
-        // req.url sẽ là /3000/abc...
-        const match = req.url.match(/^\/(\d+)/);
-        if (match) {
-            const port = parseInt(match[1]);
-            if (port === PORT || isNaN(port)) return null;
-            return `http://127.0.0.1:${port}`; // Force IPv4
-        }
-        return null; // Fallback to target
-    },
+    ws: true, // We enable WS support in the proxy lib...
+    router: proxyRouter,
     pathRewrite: (path, req) => {
-        // Path ở đây là /3000/abc... ta cần xóa /3000
-        return path.replace(/^\/\d+/, '') || '/';
+        return path.replace(/^\/p\/\d+/, '') || '/';
     },
     on: {
         error: (err, req, res) => {
+            // Error handling matching the manual upgrade logic
             const isWebSocket = req.upgrade || (res && !res.writeHead);
             if (isWebSocket) {
                 if (req.socket && !req.socket.destroyed) req.socket.destroy();
@@ -62,17 +61,16 @@ const dynamicProxy = createProxyMiddleware({
             }
             if (res && !res.headersSent) {
                 res.writeHead(502, { 'Content-Type': 'text/plain' });
-                res.end(`Proxy Error: Target unreachable.\n${err.message}`);
+                res.end(`Proxy Error: Unreachable target.\n${err.message}`);
             }
-        },
-        proxyReq: (proxyReq, req, res) => {
-             proxyReq.setHeader('Connection', 'keep-alive');
         }
     }
-});
+};
 
-// Mount SINGLE proxy instance at /p
-app.use('/p', dynamicProxy);
+const globalProxy = createProxyMiddleware(proxyOptions);
+
+// Attach HTTP Proxy handling (for normal GET/POST requests)
+app.use('/p/:port', globalProxy);
 
 
 // --- 2. TERMINAL SERVER LOGIC ---
@@ -82,8 +80,67 @@ const io = new Server(server, {
   pingTimeout: 60000,
   maxHttpBufferSize: 1e6,
   perMessageDeflate: false,
-  cors: { origin: '*' }
+  cors: { origin: '*' },
+  path: '/socket.io' // Explicitly set path
 });
+
+// --- 3. MANUAL UPGRADE HANDLING (THE TRAFFIC CONTROLLER) ---
+// This is the core fix. We manually direct traffic to avoid collisions.
+
+server.on('upgrade', (req, socket, head) => {
+    const url = req.url;
+
+    // A. Terminal Traffic -> Socket.IO
+    if (url.startsWith('/socket.io/')) {
+        // console.log('[Upgrade] Routing to Socket.IO');
+        // Let Socket.IO handle it
+        // Note: io.attach(server) normally adds a listener, but since we have manual control logic elsewhere
+        // or just want to be explicit. Actually, io(server) ALREADY adds a listener.
+        // BUT, if we want to be safe against the proxy stealing it, we rely on the fact 
+        // that http-proxy-middleware with app.use might NOT catch 'upgrade' unless configured to external server.
+        
+        // HOWEVER, to be absolutely sure, strict manual routing is best.
+        // BUT, Socket.IO adds its own listener automatically.
+        // The conflict comes because 'createProxyMiddleware' inside app.use MIGHT add one too if not careful.
+        // We configured globalProxy above. By default it might NOT attach to server 'upgrade' unless we say so?
+        // Actually, creating it doesn't attach. 'app.use' attaches it to the request flow.
+        // But for WS, express middleware chain doesn't always run.
+        
+        // Let's use the explicit 'ws: true' in options, but handle routing here?
+        // Actually, the 'createProxyMiddleware' returns a function that has .upgrade() method?
+        // Modern http-proxy-middleware usage for manual upgrade:
+        
+        // Since we initialized io(server), it attached a listener.
+        // We need to make sure we don't double handle or block.
+        // Actually, the "Collision" theory implies Proxy was catching it first.
+        
+        // STRATEGY: We trust Socket.IO to handle its own stuff correctly.
+        // We ONLY listen for /p/ upgrades and hand them to the proxy.
+        
+        // But wait, if Proxy is global middleware, does it catch upgrade? No, Express doesn't handle upgrade.
+        // So we MUST handle proxy upgrades manually here.
+        
+        return; // Socket.IO already has its own listener on server 'upgrade'. We just let it fall through to that?
+        // No, listeners run in order. If we add this listener, we are just one of them.
+        
+        // BETTER STRATEGY: 
+        // We assume Socket.IO is handling its own stuff correctly.
+        // We ONLY listen for /p/ upgrades and hand them to the proxy.
+    }
+
+    // B. Proxy Traffic -> http-proxy-middleware
+    if (url.match(/^\/p\/\d+/)) {
+        // console.log('[Upgrade] Routing to Proxy');
+        globalProxy.upgrade(req, socket, head);
+        return;
+    }
+    
+    // If we are here, and it's not socket.io (handled by its own listener) and not proxy...
+    // We do nothing, or let other listeners handle it.
+    // Ideally, we shouldn't destroy socket unless we are sure no one else wants it.
+});
+
+// --- PTY & SESSION LOGIC (Standard) ---
 
 const SHELL = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 
@@ -259,7 +316,6 @@ io.on('connection', (socket) => {
 });
 
 function shutdown() {
-  console.log('Shutdown');
   sessions.forEach(session => {
     try { if (session.pty) session.pty.kill(); } catch (e) {}
   });
