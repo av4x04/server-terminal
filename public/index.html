@@ -397,6 +397,12 @@
           <div id="status-text">Đang kết nối...</div>
         </div>
         <div class="controls">
+          <div style="display:flex;gap:4px;background:rgba(255,255,255,0.05);padding:4px;border-radius:8px;border:1px solid var(--border);">
+             <input type="number" id="port-input" placeholder="Port (e.g. 3000)" style="background:transparent;border:none;color:white;padding:4px 8px;width:100px;font-family:inherit;outline:none;" onkeydown="if(event.key==='Enter') openPort()">
+             <button class="btn" onclick="openPort()" style="padding:4px 10px;margin:0;box-shadow:none;border:none;">
+               <i class="fas fa-external-link-alt"></i>
+             </button>
+          </div>
           <button class="btn ghost" onclick="toggleFullscreen()" title="Chế độ toàn màn hình">
             <i class="fas fa-expand"></i> <span>Toàn màn hình</span>
           </button>
@@ -445,6 +451,19 @@
       } else {
         document.documentElement.requestFullscreen();
       }
+    }
+
+    function openPort() {
+        const portInput = document.getElementById('port-input');
+        const port = portInput.value.trim();
+        if (port) {
+            // Open /p/{port}/ in a new tab
+            // Construct absolute URL based on current location
+            const url = `${window.location.origin}/p/${port}/`;
+            window.open(url, '_blank');
+        } else {
+            alert('Vui lòng nhập số cổng (VD: 3000)');
+        }
     }
   </script>
 </body>

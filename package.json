@@ -1,20 +1,19 @@
 {
-  "name": "ser",
+  "name": "render-terminal-proxy",
   "version": "1.0.0",
-  "description": "Web terminal on Render",
-  "main": "server.js",
+  "private": true,
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2",
-    "socket.io": "^4.7.5",
+    "express": "^4.21.0",
+    "socket.io": "^4.8.0",
     "node-pty": "^1.0.0",
-    "uuid": "^9.0.1"
+    "http-proxy-middleware": "^3.0.0",
+    "uuid": "^10.0.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">= 18.0.0"
   }
 }
