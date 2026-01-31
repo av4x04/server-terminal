@@ -15,38 +15,61 @@ const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 3000;
 
-// --- 1. PROXY LOGIC (Must be before static files or other routes) ---
-// Route: /p/3000/some/path -> Proxy to http://localhost:3000/some/path
-app.use('/p/:port', (req, res, next) => {
-    const port = parseInt(req.params.port);
-    
-    // Security: Block access to the main server port itself or invalid ports
-    if (isNaN(port) || port < 1 || port > 65535 || port === PORT) {
-        return res.status(400).send('Invalid, restricted, or self-referential port.');
-    }
+// --- 1. ROBUST PROXY LOGIC (Single Instance - High Performance) ---
+// Docs: https://github.com/chimurai/http-proxy-middleware#router-function
 
-    // Initialize Proxy for this specific request
-    const proxy = createProxyMiddleware({
-        target: `http://localhost:${port}`,
-        changeOrigin: true,
-        ws: true, // Enable WebSocket support for proxied apps
-        pathRewrite: {
-            [`^/p/${port}`]: '', // Remove /p/XXXX prefix when forwarding
-        },
-        logger: console, // Log proxy events
-        on: {
-            error: (err, req, res) => {
-                // If the user hasn't started the service yet
-                if (res && !res.headersSent) {
-                    res.writeHead(502, { 'Content-Type': 'text/plain' });
-                    res.end(`Proxy Error: Could not connect to localhost:${port}. Make sure your service is running in the terminal.`);
-                }
-            }
+const dynamicProxy = createProxyMiddleware({
+    target: 'http://localhost:8080', // Fallback default (wont be used often due to router)
+    changeOrigin: true,
+    ws: true, // Enable WebSocket support
+    router: (req) => {
+        // Extract port from url: /p/3000/foo -> match[1] = 3000
+        const match = req.url.match(/^\/p\/(\d+)/);
+        if (match) {
+            const port = parseInt(match[1]);
+            // Security check: Don't allow proxying to the main server port itself
+            if (port === PORT) return null;
+            return `http://localhost:${port}`;
         }
-    });
+        return null;
+    },
+    pathRewrite: (path, req) => {
+        // Remove /p/3000 from the path so the target app receives /foo
+        // /p/3000/foo -> /foo
+        return path.replace(/^\/p\/\d+/, '') || '/';
+    },
+    logger: console,
+    on: {
+        error: (err, req, res) => {
+            // CRITICAL FIX: Handle WebSocket errors distinct from HTTP errors
+            // to prevent "res.writeHead is not a function" crash.
+            
+            const isWebSocket = req.upgrade || (res && !res.writeHead); 
+            
+            if (isWebSocket) {
+                console.log(`[Proxy-WS] Error on ${req.url}: Client disconnected or target offline.`);
+                // Just destroy the socket, don't try to send HTTP response
+                if (req.socket) req.socket.destroy();
+                return;
+            }
 
-    proxy(req, res, next);
+            // Standard HTTP Error Handling
+            console.error(`[Proxy-HTTP] Error on ${req.url}:`, err.message);
+            if (res && !res.headersSent) {
+                res.writeHead(502, { 'Content-Type': 'text/plain' });
+                res.end(`Proxy Error: Target service is not running or unreachable.\nDetails: ${err.message}`);
+            }
+        },
+        proxyReq: (proxyReq, req, res) => {
+            // Optional: Fix for some apps that require strict host headers
+            // proxyReq.setHeader('X-Forwarded-Prefix', req.baseUrl);
+        }
+    }
 });
+
+// Mount the single proxy instance at /p
+app.use('/p', dynamicProxy);
+
 
 // --- 2. TERMINAL SERVER LOGIC ---
 
@@ -167,11 +190,6 @@ function createSession(isInitial = false) {
   console.log(`Created session ${session.name} (${session.id})`);
   io.emit('session-created', { id: session.id, name: session.name });
 
-  // Optional: Auto-run a script on startup if needed
-  if (isInitial) {
-     // ... logic startup commands ...
-  }
-
   return session;
 }
 
@@ -196,7 +214,7 @@ function createBucket(capacity = 32768, refillRate = 16384) {
 }
 
 io.on('connection', (socket) => {
-  console.log('Client connected', socket.id);
+  // console.log('Client connected', socket.id); // Reduced verbosity
 
   const sessionList = Array.from(sessions.values()).map(s => ({ id: s.id, name: s.name }));
   socket.emit('sessions-list', sessionList);
@@ -249,23 +267,11 @@ io.on('connection', (socket) => {
     rows = Number(rows) || 30;
     try { session.pty.resize(cols, rows); } catch (e) {}
   });
-
-  socket.on('disconnect', () => {
-    console.log('Client disconnected', socket.id);
-  });
 });
 
-// Explicitly handle upgrade requests for the proxy to work with WebSockets (optional but good for robustness)
-server.on('upgrade', (req, socket, head) => {
-    // The http-proxy-middleware handles upgrades automatically if configured, 
-    // but Express + Socket.IO usually capture the upgrade event first.
-    // If a request starts with /p/, we might need manual handling if standard middleware fails.
-    // However, for most simple setups, letting Socket.IO handle its own paths and proxy handling the rest works.
-    // NOTE: Socket.IO attaches to 'upgrade' automatically.
-});
-
+// Graceful Shutdown
 function shutdown() {
-  console.log('Shutdown');
+  console.log('Server shutting down...');
   sessions.forEach(session => {
     try { if (session.pty) session.pty.kill(); } catch (e) {}
   });
