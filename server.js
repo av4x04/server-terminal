@@ -8,49 +8,59 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
+// SILENCE DEPRECATION WARNINGS
+process.removeAllListeners('warning');
+process.on('warning', (warning) => {
+    if (warning.name === 'DeprecationWarning') return;
+    console.warn(warning.name, warning.message);
+});
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 const server = createServer(app);
-server.setMaxListeners(0); // Fix: Prevent memory leak warnings
+
+// FIX: Prevent MaxListeners warning and improve stability
+server.setMaxListeners(0);
+// FIX: Keep-Alive settings to play nice with Render/Nginx Load Balancers
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
 
 const PORT = process.env.PORT || 3000;
 
-// --- 1. PROXY LOGIC (RESTORED V1 STYLE + IMPROVED STABILITY) ---
-// Route: /p/3000/some/path -> Proxy to http://127.0.0.1:3000/some/path
-
+// --- 1. PROXY LOGIC ---
 app.use('/p/:port', (req, res, next) => {
     const port = parseInt(req.params.port);
     
-    // Security check
     if (isNaN(port) || port < 1 || port > 65535 || port === PORT) {
         return res.status(400).send('Invalid or restricted port.');
     }
 
-    // Create a fresh proxy instance for this specific port request
-    // This matches the "V1" behavior you liked, which handles dynamic ports reliably.
     const proxy = createProxyMiddleware({
-        target: `http://127.0.0.1:${port}`, // Fix: Force IPv4
+        target: `http://127.0.0.1:${port}`,
         changeOrigin: true,
-        ws: true, // Enable WebSockets
+        ws: true,
         pathRewrite: {
-            [`^/p/${port}`]: '', // Strip the prefix so app receives clean path
+            [`^/p/${port}`]: '',
         },
-        // Error Handling to prevent crashes
         on: {
             error: (err, req, res) => {
+                // Completely silent error handling for WebSocket drops to prevent crashes
                 const isWebSocket = req.upgrade || (res && !res.writeHead);
                 if (isWebSocket) {
-                    if (req.socket) req.socket.destroy();
-                    return; // Silent fail for WS to prevent app crash
+                    if (req.socket && !req.socket.destroyed) req.socket.destroy();
+                    return;
                 }
                 
-                // Only send error if headers haven't been sent
                 if (res && !res.headersSent) {
                     res.writeHead(502, { 'Content-Type': 'text/plain' });
-                    res.end(`Proxy Error: Could not reach port ${port}. Ensure your service is running.\nDetails: ${err.message}`);
+                    res.end(`Proxy Error: Service on port ${port} is unreachable.\nCheck if your server is running.`);
                 }
+            },
+            proxyReq: (proxyReq, req, res) => {
+                // Fix for some apps expecting connection keep-alive
+                proxyReq.setHeader('Connection', 'keep-alive');
             }
         }
     });
@@ -164,12 +174,11 @@ function createSession(isInitial = false) {
       session.history.append(d);
       io.to(session.id).emit('output', d);
     } catch (err) {
-      console.error(`Error on PTY data for session ${session.id}:`, err);
+      // ignore
     }
   });
 
-  ptyProc.onExit(({ exitCode, signal }) => {
-    console.log(`PTY for session ${session.id} exited with code ${exitCode}`);
+  ptyProc.onExit(({ exitCode }) => {
     sessions.delete(session.id);
     io.emit('session-closed', { id: session.id, name: session.name });
   });
@@ -180,11 +189,11 @@ function createSession(isInitial = false) {
   return session;
 }
 
-// Ensure at least one session exists
 if (sessions.size === 0) createSession(true);
 
 app.use(express.static(join(__dirname, 'public')));
 
+// Simple Rate Limiter
 function createBucket(capacity = 32768, refillRate = 16384) {
   let tokens = capacity; let last = Date.now();
   return {
@@ -229,7 +238,7 @@ io.on('connection', (socket) => {
   socket.on('close-session', (sessionId) => {
     const session = sessions.get(sessionId);
     if (session) {
-      session.pty.kill();
+      try { session.pty.kill(); } catch(e){}
     }
   });
 
@@ -241,7 +250,7 @@ io.on('connection', (socket) => {
     try {
       session.pty.write(String(data));
     } catch (err) {
-      console.error(`PTY [${session.id}] write error`, err);
+      // PTY might be dead, ignore write error
     }
   });
 

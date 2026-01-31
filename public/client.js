@@ -18,7 +18,7 @@ const socket = io({ transports: ['websocket'] });
 
 // --- State Management ---
 let sessions = new Map();
-let activeSessionId = null;
+let activeSessionId = localStorage.getItem('lastSessionId') || null;
 
 // --- DOM Elements ---
 const statusText = document.getElementById('status-text');
@@ -65,9 +65,7 @@ function renderTabs() {
   addSessionBtn.textContent = '+';
   addSessionBtn.onclick = () => {
     socket.emit('create-session', (newSession) => {
-        if (newSession) {
-            console.log('Server đã xác nhận tạo phiên:', newSession.name);
-        }
+        if (newSession) console.log('Server đã xác nhận tạo phiên:', newSession.name);
     });
   };
   tabsContainer.appendChild(addSessionBtn);
@@ -77,6 +75,7 @@ function switchSession(sessionId) {
   if (!sessions.has(sessionId) || sessionId === activeSessionId) return;
   
   activeSessionId = sessionId;
+  localStorage.setItem('lastSessionId', sessionId); // Save state
   socket.emit('switch-session', sessionId);
   term.reset();
   renderTabs();
@@ -87,7 +86,7 @@ function switchSession(sessionId) {
 function resizeTerminal() {
     if (!activeSessionId) return;
     setTimeout(() => {
-        term.fit(); // You might need the fit addon for this. Or manually calculate.
+        try { term.fit(); } catch(e){} // Handle potential fit addon missing
         socket.emit('resize', { sessionId: activeSessionId, cols: term.cols, rows: term.rows });
     }, 0);
 }
@@ -97,9 +96,17 @@ socket.on('sessions-list', (sessionList) => {
   sessions.clear();
   sessionList.forEach(s => sessions.set(s.id, s));
   
-  if (sessions.size > 0 && !sessions.has(activeSessionId)) {
-    const firstSessionId = sessions.keys().next().value;
-    switchSession(firstSessionId);
+  // Logic: Try to restore last session, otherwise pick first
+  if (sessions.size > 0) {
+      if (activeSessionId && sessions.has(activeSessionId)) {
+          // We have a saved ID and it still exists on server -> Rejoin it
+          socket.emit('switch-session', activeSessionId);
+          renderTabs();
+      } else {
+          // Saved ID is stale or null -> Pick first available
+          const firstSessionId = sessions.keys().next().value;
+          switchSession(firstSessionId);
+      }
   } else {
     renderTabs();
   }
