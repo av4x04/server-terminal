@@ -21,52 +21,58 @@ const __dirname = dirname(__filename);
 const app = express();
 const server = createServer(app);
 
-// FIX: Prevent MaxListeners warning and improve stability
-server.setMaxListeners(0);
-// FIX: Keep-Alive settings to play nice with Render/Nginx Load Balancers
+// Optimizations
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
 
 const PORT = process.env.PORT || 3000;
 
-// --- 1. PROXY LOGIC ---
-app.use('/p/:port', (req, res, next) => {
-    const port = parseInt(req.params.port);
-    
-    if (isNaN(port) || port < 1 || port > 65535 || port === PORT) {
-        return res.status(400).send('Invalid or restricted port.');
-    }
+// --- 1. PROXY LOGIC (SINGLE INSTANCE - THE CORRECT WAY) ---
+// Thay vì tạo proxy trong app.use, ta tạo 1 biến duy nhất ở ngoài.
 
-    const proxy = createProxyMiddleware({
-        target: `http://127.0.0.1:${port}`,
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-            [`^/p/${port}`]: '',
-        },
-        on: {
-            error: (err, req, res) => {
-                // Completely silent error handling for WebSocket drops to prevent crashes
-                const isWebSocket = req.upgrade || (res && !res.writeHead);
-                if (isWebSocket) {
-                    if (req.socket && !req.socket.destroyed) req.socket.destroy();
-                    return;
-                }
-                
-                if (res && !res.headersSent) {
-                    res.writeHead(502, { 'Content-Type': 'text/plain' });
-                    res.end(`Proxy Error: Service on port ${port} is unreachable.\nCheck if your server is running.`);
-                }
-            },
-            proxyReq: (proxyReq, req, res) => {
-                // Fix for some apps expecting connection keep-alive
-                proxyReq.setHeader('Connection', 'keep-alive');
-            }
+const dynamicProxy = createProxyMiddleware({
+    target: 'http://127.0.0.1:8080', // Default fallback
+    changeOrigin: true,
+    ws: true, // Websocket support enabled ONCE
+    router: (req) => {
+        // req.url ở đây (khi mount vào /p) sẽ là phần đuôi sau /p
+        // Ví dụ truy cập /p/3000/abc -> req.url (đối với middleware) có thể là /3000/abc hoặc full tùy setup
+        // Để chắc ăn, ta check logic path.
+        
+        // Express khi dùng app.use('/p', ...) sẽ strip /p.
+        // req.url sẽ là /3000/abc...
+        const match = req.url.match(/^\/(\d+)/);
+        if (match) {
+            const port = parseInt(match[1]);
+            if (port === PORT || isNaN(port)) return null;
+            return `http://127.0.0.1:${port}`; // Force IPv4
         }
-    });
-
-    proxy(req, res, next);
+        return null; // Fallback to target
+    },
+    pathRewrite: (path, req) => {
+        // Path ở đây là /3000/abc... ta cần xóa /3000
+        return path.replace(/^\/\d+/, '') || '/';
+    },
+    on: {
+        error: (err, req, res) => {
+            const isWebSocket = req.upgrade || (res && !res.writeHead);
+            if (isWebSocket) {
+                if (req.socket && !req.socket.destroyed) req.socket.destroy();
+                return;
+            }
+            if (res && !res.headersSent) {
+                res.writeHead(502, { 'Content-Type': 'text/plain' });
+                res.end(`Proxy Error: Target unreachable.\n${err.message}`);
+            }
+        },
+        proxyReq: (proxyReq, req, res) => {
+             proxyReq.setHeader('Connection', 'keep-alive');
+        }
+    }
 });
+
+// Mount SINGLE proxy instance at /p
+app.use('/p', dynamicProxy);
 
 
 // --- 2. TERMINAL SERVER LOGIC ---
@@ -173,9 +179,7 @@ function createSession(isInitial = false) {
     try {
       session.history.append(d);
       io.to(session.id).emit('output', d);
-    } catch (err) {
-      // ignore
-    }
+    } catch (err) { }
   });
 
   ptyProc.onExit(({ exitCode }) => {
@@ -193,7 +197,6 @@ if (sessions.size === 0) createSession(true);
 
 app.use(express.static(join(__dirname, 'public')));
 
-// Simple Rate Limiter
 function createBucket(capacity = 32768, refillRate = 16384) {
   let tokens = capacity; let last = Date.now();
   return {
@@ -237,9 +240,7 @@ io.on('connection', (socket) => {
 
   socket.on('close-session', (sessionId) => {
     const session = sessions.get(sessionId);
-    if (session) {
-      try { session.pty.kill(); } catch(e){}
-    }
+    if (session) try { session.pty.kill(); } catch(e){}
   });
 
   socket.on('input', ({ sessionId, data }) => {
@@ -247,11 +248,7 @@ io.on('connection', (socket) => {
     if (!session || !session.pty) return;
     const bytes = Buffer.byteLength(String(data), 'utf8');
     if (!bucket.take(bytes)) return;
-    try {
-      session.pty.write(String(data));
-    } catch (err) {
-      // PTY might be dead, ignore write error
-    }
+    try { session.pty.write(String(data)); } catch (err) {}
   });
 
   socket.on('resize', ({ sessionId, cols, rows }) => {
