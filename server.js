@@ -36,60 +36,6 @@ const log = {
     debug: (msg, ...args) => process.env.DEBUG && console.log(`[DEBUG] ${msg}`, ...args)
 };
 
-// --- PROXY CONFIGURATION ---
-const proxyRouter = (req) => {
-    const match = req.url.match(/^\/p\/(\d+)/);
-    if (match) {
-        const port = parseInt(match[1]);
-        if (isNaN(port) || port < 1 || port > 65535 || port === PORT) {
-            log.warn(`Invalid proxy port: ${port}`);
-            return null;
-        }
-        return `http://127.0.0.1:${port}`;
-    }
-    return null;
-};
-
-const proxyOptions = {
-    target: 'http://127.0.0.1:8080',
-    changeOrigin: true,
-    ws: false, // We handle WebSocket upgrades manually
-    router: proxyRouter,
-    pathRewrite: (path) => {
-        return path.replace(/^\/p\/\d+/, '') || '/';
-    },
-    timeout: 30000,
-    proxyTimeout: 30000,
-    on: {
-        error: (err, req, res) => {
-            log.error('Proxy error:', err.message);
-            if (res && !res.headersSent) {
-                res.writeHead(502, { 'Content-Type': 'text/plain' });
-                res.end(`Proxy Error: Unable to reach target service.\n${err.message}`);
-            }
-        },
-        proxyReq: (proxyReq, req) => {
-            log.debug(`Proxying ${req.method} ${req.url}`);
-        }
-    }
-};
-
-const globalProxy = createProxyMiddleware(proxyOptions);
-
-// Attach HTTP Proxy for regular requests
-app.use('/p/:port', globalProxy);
-
-// --- SOCKET.IO CONFIGURATION ---
-const io = new Server(server, {
-    pingInterval: 25000,
-    pingTimeout: 60000,
-    maxHttpBufferSize: 1e6,
-    perMessageDeflate: false,
-    cors: { origin: '*' },
-    path: '/socket.io',
-    transports: ['websocket', 'polling']
-});
-
 // --- PORT AVAILABILITY CHECKER ---
 function checkPortAvailable(port, timeout = 2000) {
     return new Promise((resolve) => {
@@ -138,20 +84,80 @@ function checkPortAvailable(port, timeout = 2000) {
     });
 }
 
-// --- MANUAL UPGRADE HANDLER (CRITICAL FIX) ---
-// Remove all default upgrade listeners to avoid conflicts
+// --- PROXY MIDDLEWARE (FIXED) ---
+app.use('/p/:port', async (req, res, next) => {
+    const targetPort = parseInt(req.params.port);
+    
+    log.debug(`Proxy request: ${req.method} ${req.url} -> port ${targetPort}`);
+
+    // Validate port
+    if (isNaN(targetPort) || targetPort < 1 || targetPort > 65535 || targetPort === PORT) {
+        log.warn(`Invalid proxy port: ${targetPort}`);
+        return res.status(400).send('Invalid port number');
+    }
+
+    // Check if port is available
+    const isAvailable = await checkPortAvailable(targetPort, 3000);
+    
+    if (!isAvailable) {
+        log.warn(`Target port ${targetPort} is not available`);
+        return res.status(502).send(`Service on port ${targetPort} is not available. Make sure your application is running on that port.`);
+    }
+
+    // Create dynamic proxy for this specific port
+    const dynamicProxy = createProxyMiddleware({
+        target: `http://127.0.0.1:${targetPort}`,
+        changeOrigin: true,
+        ws: false, // WebSocket handled separately
+        pathRewrite: (path) => {
+            // Remove /p/PORT from the path
+            const newPath = path.replace(/^\/p\/\d+/, '') || '/';
+            log.debug(`Path rewrite: ${path} -> ${newPath}`);
+            return newPath;
+        },
+        timeout: 30000,
+        proxyTimeout: 30000,
+        onProxyReq: (proxyReq, req, res) => {
+            log.debug(`Proxying to http://127.0.0.1:${targetPort}${proxyReq.path}`);
+        },
+        onProxyRes: (proxyRes, req, res) => {
+            log.debug(`Response from port ${targetPort}: ${proxyRes.statusCode}`);
+        },
+        onError: (err, req, res) => {
+            log.error(`Proxy error for port ${targetPort}:`, err.message);
+            if (!res.headersSent) {
+                res.status(502).send(`Proxy Error: Unable to reach service on port ${targetPort}\n${err.message}`);
+            }
+        }
+    });
+
+    // Execute the proxy
+    dynamicProxy(req, res, next);
+});
+
+// --- SOCKET.IO CONFIGURATION ---
+const io = new Server(server, {
+    pingInterval: 25000,
+    pingTimeout: 60000,
+    maxHttpBufferSize: 1e6,
+    perMessageDeflate: false,
+    cors: { origin: '*' },
+    path: '/socket.io',
+    transports: ['websocket', 'polling']
+});
+
+// --- MANUAL UPGRADE HANDLER FOR WEBSOCKETS ---
 server.removeAllListeners('upgrade');
 
 server.on('upgrade', async (req, socket, head) => {
     const url = req.url || '';
     
-    log.debug(`Upgrade request: ${url}`);
+    log.debug(`WebSocket upgrade request: ${url}`);
 
     // Priority 1: Socket.IO WebSocket connections
     if (url.startsWith('/socket.io/')) {
-        log.debug('Routing to Socket.IO');
+        log.debug('Routing WebSocket to Socket.IO');
         
-        // Let Socket.IO's engine handle the upgrade
         if (io.engine) {
             io.engine.handleUpgrade(req, socket, head);
         } else {
@@ -166,11 +172,11 @@ server.on('upgrade', async (req, socket, head) => {
     if (proxyMatch) {
         const targetPort = parseInt(proxyMatch[1]);
         
-        log.debug(`Proxy upgrade request to port ${targetPort}`);
+        log.debug(`WebSocket proxy request to port ${targetPort}`);
 
         // Validate port
         if (isNaN(targetPort) || targetPort < 1 || targetPort > 65535 || targetPort === PORT) {
-            log.warn(`Invalid proxy target port: ${targetPort}`);
+            log.warn(`Invalid WebSocket proxy port: ${targetPort}`);
             socket.write('HTTP/1.1 400 Bad Request\r\n\r\n');
             socket.destroy();
             return;
@@ -180,19 +186,33 @@ server.on('upgrade', async (req, socket, head) => {
         const isAvailable = await checkPortAvailable(targetPort, 3000);
         
         if (!isAvailable) {
-            log.warn(`Target port ${targetPort} is not available`);
-            socket.write('HTTP/1.1 502 Bad Gateway\r\nContent-Type: text/plain\r\n\r\n');
-            socket.write(`Target service on port ${targetPort} is not available\n`);
+            log.warn(`WebSocket target port ${targetPort} is not available`);
+            socket.write('HTTP/1.1 502 Bad Gateway\r\n\r\n');
             socket.destroy();
             return;
         }
 
-        // Proceed with proxy upgrade
+        // Create WebSocket proxy for this connection
+        const wsProxy = createProxyMiddleware({
+            target: `http://127.0.0.1:${targetPort}`,
+            changeOrigin: true,
+            ws: true,
+            pathRewrite: (path) => {
+                return path.replace(/^\/p\/\d+/, '') || '/';
+            },
+            onError: (err, req, socket) => {
+                log.error(`WebSocket proxy error:`, err.message);
+                if (!socket.destroyed) {
+                    socket.destroy();
+                }
+            }
+        });
+
         try {
-            globalProxy.upgrade(req, socket, head);
-            log.debug(`Successfully proxied WebSocket to port ${targetPort}`);
+            wsProxy.upgrade(req, socket, head);
+            log.debug(`WebSocket successfully proxied to port ${targetPort}`);
         } catch (err) {
-            log.error(`Proxy upgrade failed: ${err.message}`);
+            log.error(`WebSocket proxy upgrade failed:`, err.message);
             if (!socket.destroyed) {
                 socket.write('HTTP/1.1 502 Bad Gateway\r\n\r\n');
                 socket.destroy();
@@ -201,8 +221,8 @@ server.on('upgrade', async (req, socket, head) => {
         return;
     }
 
-    // Priority 3: Unknown requests
-    log.warn(`Unknown upgrade request: ${url}`);
+    // Unknown WebSocket request
+    log.warn(`Unknown WebSocket upgrade request: ${url}`);
     socket.write('HTTP/1.1 404 Not Found\r\n\r\n');
     socket.destroy();
 });
@@ -265,7 +285,7 @@ class RingBuffer {
 
 // --- SESSION MANAGEMENT ---
 const sessions = new Map();
-const HISTORY_LIMIT = 1024 * 512; // 512KB history per session
+const HISTORY_LIMIT = 1024 * 512;
 const SHELL = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 
 function getNextSessionNumber() {
@@ -389,7 +409,6 @@ io.on('connection', (socket) => {
 
     const bucket = new TokenBucket(32768, 16384);
 
-    // Send current sessions list
     const sessionList = Array.from(sessions.values()).map(s => ({
         id: s.id,
         name: s.name,
@@ -398,11 +417,9 @@ io.on('connection', (socket) => {
     }));
     socket.emit('sessions-list', sessionList);
 
-    // Switch to a session
     socket.on('switch-session', (sessionId) => {
         log.debug(`Client ${socket.id} switching to session ${sessionId}`);
 
-        // Leave all current rooms except own room
         socket.rooms.forEach(room => {
             if (room !== socket.id) {
                 socket.leave(room);
@@ -413,7 +430,6 @@ io.on('connection', (socket) => {
         if (session) {
             socket.join(sessionId);
             
-            // Send session history
             const history = session.history.toString();
             if (history.length > 0) {
                 socket.emit('history', history);
@@ -426,7 +442,6 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Create new session
     socket.on('create-session', (callback) => {
         log.debug(`Client ${socket.id} creating new session`);
 
@@ -447,7 +462,6 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Close session
     socket.on('close-session', (sessionId) => {
         log.debug(`Client ${socket.id} closing session ${sessionId}`);
 
@@ -462,7 +476,6 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Handle terminal input
     socket.on('input', ({ sessionId, data }) => {
         const session = sessions.get(sessionId);
         
@@ -473,7 +486,6 @@ io.on('connection', (socket) => {
 
         const bytes = Buffer.byteLength(String(data), 'utf8');
         
-        // Rate limiting
         if (!bucket.take(bytes)) {
             log.warn(`Rate limit exceeded for client ${socket.id}`);
             return;
@@ -487,7 +499,6 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Handle terminal resize
     socket.on('resize', ({ sessionId, cols, rows }) => {
         const session = sessions.get(sessionId);
         
@@ -506,12 +517,10 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Handle disconnect
     socket.on('disconnect', (reason) => {
         log.info(`Client disconnected: ${socket.id} (${reason})`);
     });
 
-    // Handle errors
     socket.on('error', (err) => {
         log.error(`Socket error from ${socket.id}:`, err);
     });
@@ -535,7 +544,6 @@ app.get('/health', (req, res) => {
 function shutdown(signal) {
     log.info(`Received ${signal}, shutting down gracefully...`);
 
-    // Close all sessions
     sessions.forEach(session => {
         try {
             if (session.pty) {
@@ -546,18 +554,15 @@ function shutdown(signal) {
         }
     });
 
-    // Close Socket.IO
     io.close(() => {
         log.info('Socket.IO closed');
     });
 
-    // Close HTTP server
     server.close(() => {
         log.info('HTTP server closed');
         process.exit(0);
     });
 
-    // Force exit after 10 seconds
     setTimeout(() => {
         log.error('Forced shutdown after timeout');
         process.exit(1);
@@ -567,7 +572,6 @@ function shutdown(signal) {
 process.on('SIGINT', () => shutdown('SIGINT'));
 process.on('SIGTERM', () => shutdown('SIGTERM'));
 
-// --- UNCAUGHT EXCEPTION HANDLER ---
 process.on('uncaughtException', (err) => {
     log.error('Uncaught Exception:', err);
     shutdown('uncaughtException');
@@ -580,6 +584,8 @@ process.on('unhandledRejection', (reason, promise) => {
 // --- START SERVER ---
 server.listen(PORT, '0.0.0.0', () => {
     log.info(`Server listening on http://localhost:${PORT}`);
+    log.info(`Proxy usage: http://localhost:${PORT}/p/[PORT]/[PATH]`);
+    log.info(`Example: http://localhost:${PORT}/p/5000/`);
     log.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
     log.info(`Platform: ${os.platform()} ${os.arch()}`);
     log.info(`Node version: ${process.version}`);
