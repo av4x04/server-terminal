@@ -1,2 +1,2 @@
-cd Ubuntu22.04
+cd Ubuntu
 bash root.sh
