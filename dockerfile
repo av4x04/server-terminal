@@ -27,15 +27,14 @@ RUN npm install --production
 COPY . .
 
 # ==============================================================================
-# PHẦN ĐỘ CHẾ: CUSTOM TÊN TERMINAL
-# Đoạn này sẽ sửa file cấu hình .bashrc để đổi cái prompt (dấu nhắc lệnh)
-# \e[1;32m : Màu xanh lá (Green) - Nhìn cho giống Hacker
-# root@Hacker-Lỏ : Tên mày muốn hiển thị. Thích đổi tên khác thì sửa ở đây.
-# \w : Hiển thị thư mục hiện tại
+# PHẦN ĐỘ CHẾ: CUSTOM TÊN TERMINAL MÀU ĐỎ RỰC
+# \e[1;31m : Màu đỏ (Red) - Cho đúng ý mày nhé
+# admin@client : Tên mày yêu cầu
+# \e[0m : Reset màu về mặc định sau dấu :
 # ==============================================================================
-RUN echo 'export PS1="\e[1;32mroot@Hacker-Lỏ\e[0m:\w\$ "' >> /root/.bashrc
+RUN echo 'export PS1="\e[1;31madmin@client\e[0m:\w\$ "' >> /root/.bashrc
 
-# Set shell mặc định là BASH (quan trọng, vì sh không nhận giao diện đẹp)
+# Set shell mặc định là BASH
 ENV SHELL=/bin/bash
 
 # 7. Mở port
@@ -44,3 +43,4 @@ EXPOSE 10000
 
 # 8. Chạy
 CMD ["node", "server.js"]
+
