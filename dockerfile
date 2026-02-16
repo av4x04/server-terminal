@@ -1,15 +1,14 @@
-# 1. Dùng bản Slim cho nhẹ
+# 1. Dùng bản Slim (Đã có sẵn Node.js v20, ĐỪNG cài thêm node nữa)
 FROM node:20-slim
 
-# 2. Cài đồ chơi + BẮT BUỘC PHẢI CÓ 'make', 'g++', 'python3' ĐỂ BUILD NODE-PTY
+# 2. Cài đồ chơi (Tao đã bỏ chữ 'node' gây lỗi và giữ lại zip, unzip, nano)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
     git \
-		node \
-		zip \
-		unzip \
-		nano \
+    zip \
+    unzip \
+    nano \
     wget \
     curl \
     make \
@@ -24,27 +23,22 @@ WORKDIR /app
 COPY package*.json ./
 
 # 5. Cài node_modules
-# Thằng node-pty rất kén, cần build từ source nên bước này hay lỗi nếu thiếu đồ
 RUN npm install --production
 
 # 6. Copy code vào
 COPY . .
 
-# ==============================================================================
-# PHẦN ĐỘ CHẾ: CUSTOM TÊN TERMINAL MÀU ĐỎ RỰC
-# \e[1;31m : Màu đỏ (Red) - Cho đúng ý mày nhé
-# admin@client : Tên mày yêu cầu
-# \e[0m : Reset màu về mặc định sau dấu :
-# ==============================================================================
+# 7. Độ tên admin@client màu đỏ rực
 RUN echo 'export PS1="\e[1;31madmin@client\e[0m:\w\$ "' >> /root/.bashrc
 
 # Set shell mặc định là BASH
 ENV SHELL=/bin/bash
 
-# 7. Mở port
+# 8. Mở port
 ENV PORT=10000
 EXPOSE 10000
 
-# 8. Chạy
-CMD ["node", "server.js"]
+# 9. Chạy (Đã thêm giới hạn RAM cho mày sống sót)
+CMD ["node", "--max-old-space-size=450", "server.js"]
+
 
