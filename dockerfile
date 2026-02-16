@@ -31,4 +31,4 @@ ENV PORT=10000
 EXPOSE 10000
 
 # 8. Chạy
-CMD ["node", server.js"]
+CMD ["node", "server.js"]
