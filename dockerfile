@@ -1,7 +1,8 @@
-# 1. Dùng bản Slim (Node v20 có sẵn, cực nhẹ cho Render)
+# 1. Dùng bản Slim (Node v20)
 FROM node:20-slim
 
-# 2. Cài đầy đủ đồ chơi (Cấm cắn: python, git, zip, nano, build-essential, nodejs, npm...)
+# 2. Cài đồ chơi (Cấm cắn: python, git, zip, nano, build-essential, nodejs, npm...)
+# Đoạn này chạy LÚC BUILD để có sẵn đồ dùng
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nodejs \
     npm \
@@ -21,23 +22,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 3. Set thư mục làm việc
 WORKDIR /app
 
-# 4. Copy package.json trước để build cho nhanh
+# 4. Copy package.json trước
 COPY package*.json ./
 
-# 5. Cài node_modules (chế độ production cho đỡ tốn RAM)
+# 5. Cài node_modules
 RUN npm install --production
 
-# 6. Copy toàn bộ code vào
+# 6. Copy code vào
 COPY . .
 
-# 7. Độ tên admin@client màu đỏ rực (Giữ đúng chất chơi của mày)
-RUN echo 'export PS1="\e[1;31madmin@client\e[0m:\w\$ "' >> /root/.bashrc
+# 7. ĐỘ MÀU ĐỎ + TỰ ĐỘNG UPDATE KHI VÀO SHELL
+# Tao nhét thêm lệnh 'apt update' vào đây, mỗi lần mày mở Terminal trên Render là nó tự chạy
+RUN echo 'apt update' >> /root/.bashrc && \
+    echo 'export PS1="\e[1;31madmin@client\e[0m:\w\$ "' >> /root/.bashrc
 
-# 8. CẤU HÌNH HỆ THỐNG & ÉP RAM (Lệnh export/ENV xịn nhất 2026)
+# 8. ÉP RAM 450MB (Xịn nhất 2026)
 ENV NODE_OPTIONS="--max-old-space-size=450"
 ENV SHELL=/bin/bash
 ENV PORT=10000
 EXPOSE 10000
 
-# 9. Chạy app (Gọn gàng, không lôi thôi)
+# 9. Chạy app
 CMD ["node", "server.js"]
