@@ -1,8 +1,10 @@
-# 1. Dùng bản Slim (Đã có sẵn Node.js v20, ĐỪNG cài thêm node nữa)
+# 1. Dùng bản Slim (Node v20 có sẵn, cực nhẹ cho Render)
 FROM node:20-slim
 
-# 2. Cài đồ chơi (Tao đã bỏ chữ 'node' gây lỗi và giữ lại zip, unzip, nano)
+# 2. Cài đầy đủ đồ chơi (Cấm cắn: python, git, zip, nano, build-essential, nodejs, npm...)
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    nodejs \
+    npm \
     python3 \
     python3-pip \
     git \
@@ -19,26 +21,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 3. Set thư mục làm việc
 WORKDIR /app
 
-# 4. Copy package.json trước
+# 4. Copy package.json trước để build cho nhanh
 COPY package*.json ./
 
-# 5. Cài node_modules
+# 5. Cài node_modules (chế độ production cho đỡ tốn RAM)
 RUN npm install --production
 
-# 6. Copy code vào
+# 6. Copy toàn bộ code vào
 COPY . .
 
-# 7. Độ tên admin@client màu đỏ rực
+# 7. Độ tên admin@client màu đỏ rực (Giữ đúng chất chơi của mày)
 RUN echo 'export PS1="\e[1;31madmin@client\e[0m:\w\$ "' >> /root/.bashrc
 
-# Set shell mặc định là BASH
+# 8. CẤU HÌNH HỆ THỐNG & ÉP RAM (Lệnh export/ENV xịn nhất 2026)
+ENV NODE_OPTIONS="--max-old-space-size=450"
 ENV SHELL=/bin/bash
-
-# 8. Mở port
 ENV PORT=10000
 EXPOSE 10000
 
-# 9. Chạy (Đã thêm giới hạn RAM cho mày sống sót)
-CMD ["node", "--max-old-space-size=450", "server.js"]
-
-
+# 9. Chạy app (Gọn gàng, không lôi thôi)
+CMD ["node", "server.js"]
